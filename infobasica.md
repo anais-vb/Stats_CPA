@@ -1,8 +1,5 @@
 
 ---
-layout: page
-title: "Informació Bàsica"
-permalink: /infobasica/
 ---
 
 # INFORMACIÓ BÀSICA DE L'ASSIGNATURA 
