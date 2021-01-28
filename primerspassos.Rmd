@@ -2,4 +2,4 @@
 title: "Primers passos"
 ---
 
-More about this website.
+En aquest apartat trobareu les principals indicacions per als vostres primers passos amb R. 
