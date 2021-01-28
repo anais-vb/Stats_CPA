@@ -5,3 +5,5 @@ En aquesta pàgina podreu trobar explicacions i el codi que anirem utilitzant a 
 1. Informació bàsica de l'assignatura 
 2. Primers passos amb R
 3. ....
+
+[Link](url) and ![Image](src)
