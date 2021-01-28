@@ -1,0 +1,11 @@
+name: "my-website"
+output_dir: "."
+navbar:
+  title: "Stats CPA"
+  left:
+    - text: "Inici"
+      href: index.html
+    - text: "Primers passos"
+      href: primerspassos.html
+    - text: "Ordenació de variables"
+      href: ordenacio.html
