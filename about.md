@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Informació
-permalink:/about/
+permalink: /about/
 ---
 
 # Informació bàsica de l'assignatura i d'aquesta pàgina 
