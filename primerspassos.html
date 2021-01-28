@@ -309,7 +309,142 @@ $(document).ready(function () {
 </div>
 
 
-<p>En aquest apartat trobareu les principals indicacions per als vostres primers passos amb R.</p>
+<div id="com-funciona-r" class="section level1">
+<h1>Com funciona R?</h1>
+<p>A la primera classe vam poder veure com instal·lar R, establir els directoris de treball i quina estructura té RStudio, així com les funcions de cadascuna de les parts de la interfície de treball (document - script - que tenim obert, la consola, l’entorn global i l’apartat de visualització).</p>
+<p>Ara començarem a aprendre els rudiments de R.</p>
+<p>R és un llenguatge de programació. Això implica que interaccioneu amb el programa mitjançant codi. La sintaxi és un conjunt de codis. El seu ús en R és bastant intuïtiu i segueix un patró lògic.</p>
+<p>En el seu nivell més bàsic, R pot ser entesa com una calculadora. Els operadors aritmètics més bàsics són: +,-,*,/ i ^ per elevar potències.</p>
+<p>Primer de tot, escriviu al vostre script el següent:</p>
+<pre class="r"><code>1+2</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code>2*3</code></pre>
+<pre><code>## [1] 6</code></pre>
+<p>Ara, proveu a escriure la mateixa suma a la consola. Com veieu a la consola també podeu realitzar les operacions, però és millor fer-ho al llibre per tal de registrar els moviments que aneu realitzant.</p>
+<p>Escriure les intruccions a l’editor de sintaxis ens permet tenir una sintaxi editable que no s’executa de forma automàtica com operacions computacionals (això sí passa quan ho escrivim directament a la consola). Per executar sintaxis haureu de seleccionar amb el cursor o bé situar-vos sobre el codi i (1) apretar el botó de “Run” a la part superior de l’editor de sintaxi o bé (2) apretar la combinació de tecles ctrl + enter.</p>
+<p>Existeixen una sèrie de convencions quan treballem amb scripts que necessiteu saber:</p>
+<ol style="list-style-type: decimal">
+<li>Les funcions sempre porten un parèntesi, com sum() o mean()</li>
+<li>Altres objectes a R no necessiten parèntesi</li>
+<li>És possible que a vegades trobeu aquest tipus de terminologia: dplyr::mutate() - en aquests casos, s’utilitza aquest sistema per indicar clarament que la funció que utilitzem (mutate()) es troba dins el paquet dplyr. Normalment nosaltres carregarem els paquets a l’inici de la sessió pel que no haurem de recordar els paquets a cada funció, però a vegades trobareu aquest tipus de notacions en exemples a la web.</li>
+</ol>
+<div id="inclusió-de-notes-al-codi-en-script" class="section level2">
+<h2>Inclusió de notes al codi en script</h2>
+<p>L’editor de sintaxi accepta la inclusió de comentaris en el cos de codi. Quan anteposem el signe (#) abans d’un comandament, aquest es posa d’un color diferent als codis que representen instruccions vàlides (en la visualització per defecte de RStudio, el color serà automàticament verd).</p>
+<p><em>Per a què serveix?</em> Tota línia que estigui amb aquest signe el programa la ignorarà com a codi R. Això permet incloure notes que indiquin el que s’està fent, missatges o ajudes de memòria, particularment quan treballem en un projecte que ens pot durar diversos dies - en els quals serà difícil recordar tot el que hagi fet o provat - i en contextos com l’entrega d’exercicis, treballs en grup, etc.</p>
+<pre class="r"><code>1+2*3 # Ens permet incloure notes </code></pre>
+<pre><code>## [1] 7</code></pre>
+<pre class="r"><code>#---------------------- ENCAPÇALAMENT -----------------------------
+1+1 </code></pre>
+<pre><code>## [1] 2</code></pre>
+</div>
+<div id="demanar-ajuda" class="section level2">
+<h2>Demanar ajuda</h2>
+<p>En aquestes sessions us donarem algunes pistes per aprendre rudiments de R i com aplicar conceptes estadístics bàsics amb R. Ara bé, probablement no resoldrem tots els dubtes que us puguin sorgir i segur passaran coses entre sessions. En aquest apartat us donem algunes pistes perque trobeu ajuda de forma autònoma (per descomptat, ens podeu escriure un correu, però internet sol ser més ràpid).</p>
+<ol style="list-style-type: decimal">
+<li>Busca a la documentació de RStudio.</li>
+</ol>
+<pre class="r"><code>#Per ajuda general 
+help.start()</code></pre>
+<pre><code>## If nothing happens, you should open
+## &#39;http://127.0.0.1:25980/doc/html/index.html&#39; yourself</code></pre>
+<pre class="r"><code># Ajuda sobre una funció
+help(mean) # Equivalent to ?mean</code></pre>
+<p>L’ajuda apareixera a la pantalla d’ajuda de la dreta.</p>
+<pre class="r"><code>#Buscar el nombre de funcions que contenen un conjunt de caràcters
+apropos(&quot;mean&quot;)</code></pre>
+<pre><code>##  [1] &quot;.colMeans&quot;     &quot;.rowMeans&quot;     &quot;colMeans&quot;      &quot;kmeans&quot;        &quot;mean&quot;          &quot;mean.Date&quot;     &quot;mean.default&quot;  &quot;mean.difftime&quot; &quot;mean.POSIXct&quot; 
+## [10] &quot;mean.POSIXlt&quot;  &quot;rowMeans&quot;      &quot;weighted.mean&quot;</code></pre>
+<pre class="r"><code>#Buscar exemples d&#39;una funció
+example(mean)</code></pre>
+<pre><code>## 
+## mean&gt; x &lt;- c(0:10, 50)
+## 
+## mean&gt; xm &lt;- mean(x)
+## 
+## mean&gt; c(xm, mean(x, trim = 0.10))
+## [1] 8.75 5.50</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Busca a Google: no és broma. Si et quedes encallat Google i els milions de blogs d’ajuda a la xarxa són un gran recurs, particularment amb els errors (probablement algú ha estat en la teva mateixa situació abans i ha demanat ajuda!)</p></li>
+<li><p>Si Google no ajuda, pots provar llocs més especialitzats com <a href="https://stackoverflow.com/" class="uri">https://stackoverflow.com/</a> . Primer tracta de buscar si algú ha resolt el dubte abans (navega una estona!). Si no trobes la resposta, pots penjar la teva pregunta amb un reprex (minimal reproducible example).</p></li>
+</ol>
+</div>
+</div>
+<div id="crear-objectes" class="section level1">
+<h1>Crear objectes</h1>
+<p>El comandament més bàsic a R consisteix en crear un objecte i assignar-li una dada numèrica.</p>
+<pre class="r"><code>x &lt;- 10 # Assignar el valor de 10 a l&#39;objecte x
+x</code></pre>
+<pre><code>## [1] 10</code></pre>
+<pre class="r"><code># Cambiar el valor de X per 5
+x &lt;- 5
+x</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p><em>Atenció!</em> R és sensible a les majúscules, pel que X i x no seran el mateix.</p>
+<div id="tipus-dobjectes-a-r" class="section level2">
+<h2>Tipus d’objectes a R</h2>
+<p>R és un llenguatge orientat a objectes, això implica que els objectes seran molt importants. Quan treballem amb dades en ciències socials, molts cops aquests objectes seran variables (aquesta qüestió la veurem més endavant).</p>
+<ol style="list-style-type: decimal">
+<li>numeric: valors numèrics , inclou decimals.</li>
+</ol>
+<pre class="r"><code>a &lt;- 3
+a</code></pre>
+<pre><code>## [1] 3</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li><p>integer: valors numèrics , no inclou decimals.</p></li>
+<li><p>character: valors alfanumèrics, es a dir: lletres, números o signes barrejats.</p></li>
+</ol>
+<pre class="r"><code>elmeunom &lt;- &quot;Anais&quot;
+elmeunom</code></pre>
+<pre><code>## [1] &quot;Anais&quot;</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>logical: valors lògics, TRUE o FALSE.</li>
+</ol>
+<pre class="r"><code>mylog &lt;- TRUE
+mylog</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+<div id="na-inf-i-nan" class="section level2">
+<h2>NA, Inf i NaN</h2>
+<p><em>Els valors NA representen els valors perduts (valors no disponibles) </em>Infinit positiu i negatiu es representen amb Inf i -Inf</p>
+<pre class="r"><code>1/0</code></pre>
+<pre><code>## [1] Inf</code></pre>
+<pre class="r"><code>-5/0</code></pre>
+<pre><code>## [1] -Inf</code></pre>
+<p>A R, NaN significa ‘Not a Number’</p>
+<pre class="r"><code>sqrt(-4)</code></pre>
+<pre><code>## Warning in sqrt(-4): NaNs produced</code></pre>
+<pre><code>## [1] NaN</code></pre>
+<p>Ara que hem creat diversos objectes, aquests es troben emmagatzemats a l’entorn de treball. Per veure quins objectes tenim:</p>
+<pre class="r"><code>objects()</code></pre>
+<pre><code>## [1] &quot;a&quot;        &quot;b&quot;        &quot;edad&quot;     &quot;elmeunom&quot; &quot;letras&quot;   &quot;mylog&quot;    &quot;x&quot;        &quot;xm&quot;</code></pre>
+<pre class="r"><code>#És equivalent a:
+ls()</code></pre>
+<pre><code>## [1] &quot;a&quot;        &quot;b&quot;        &quot;edad&quot;     &quot;elmeunom&quot; &quot;letras&quot;   &quot;mylog&quot;    &quot;x&quot;        &quot;xm&quot;</code></pre>
+<pre class="r"><code>#Un objecte es pot eliminar amb la funció remove o amb l&#39;equivalent, rm.
+rm(x)
+
+# Per esborrar l&#39;entorn de treball:
+rm(list = ls())</code></pre>
+<p>##Vectors</p>
+<p>Si els objectes creats contenen un conjunt de dades del mateix tipus, per a R això serà un VECTOR.</p>
+<pre class="r"><code>#Concatenar valors per crear un vector de més d&#39;un sol valor
+edad &lt;- c(15, 12, 27, 55, 63, 63, 24,21, 70)
+edad</code></pre>
+<pre><code>## [1] 15 12 27 55 63 63 24 21 70</code></pre>
+<pre class="r"><code>class(edad) # Vector de tipus numeric </code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>#Vector numérico (función concatenar)
+a &lt;- c(4, 3, 5) 
+
+#Vector numérico (función concatenar)
+b &lt;- c(1.1, 4.67, 5.1, 6.8) 
+
+#Vector alfanumérico (función concatenar)
+letras &lt;- c(&quot;hombre&quot;, &quot;mujer&quot;, &quot;no sabe/no responde&quot;)</code></pre>
+<p>A mida que creem nous objectes, vectors, a l’entorn de treball podem veure com apareixen nous objectes, amb la seva respectiva quantitat de casos i tipus d’objecte assignat pel programa.</p>
+</div>
+</div>
 
 
 
