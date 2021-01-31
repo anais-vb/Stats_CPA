@@ -347,14 +347,15 @@ $(document).ready(function () {
 <pre class="r"><code>#Per ajuda general 
 help.start()</code></pre>
 <pre><code>## If nothing happens, you should open
-## &#39;http://127.0.0.1:25980/doc/html/index.html&#39; yourself</code></pre>
+## &#39;http://127.0.0.1:11935/doc/html/index.html&#39; yourself</code></pre>
 <pre class="r"><code># Ajuda sobre una funció
 help(mean) # Equivalent to ?mean</code></pre>
 <p>L’ajuda apareixera a la pantalla d’ajuda de la dreta.</p>
 <pre class="r"><code>#Buscar el nombre de funcions que contenen un conjunt de caràcters
 apropos(&quot;mean&quot;)</code></pre>
-<pre><code>##  [1] &quot;.colMeans&quot;     &quot;.rowMeans&quot;     &quot;colMeans&quot;      &quot;kmeans&quot;        &quot;mean&quot;          &quot;mean.Date&quot;     &quot;mean.default&quot;  &quot;mean.difftime&quot; &quot;mean.POSIXct&quot; 
-## [10] &quot;mean.POSIXlt&quot;  &quot;rowMeans&quot;      &quot;weighted.mean&quot;</code></pre>
+<pre><code>##  [1] &quot;.colMeans&quot;      &quot;.rowMeans&quot;      &quot;colMeans&quot;       &quot;cummean&quot;        &quot;kmeans&quot;         &quot;mean&quot;           &quot;mean.Date&quot;      &quot;mean.default&quot;  
+##  [9] &quot;mean.difftime&quot;  &quot;mean.POSIXct&quot;   &quot;mean.POSIXlt&quot;   &quot;mean_cl_boot&quot;   &quot;mean_cl_normal&quot; &quot;mean_sdl&quot;       &quot;mean_se&quot;        &quot;rowMeans&quot;      
+## [17] &quot;weighted.mean&quot;</code></pre>
 <pre class="r"><code>#Buscar exemples d&#39;una funció
 example(mean)</code></pre>
 <pre><code>## 
@@ -417,10 +418,20 @@ mylog</code></pre>
 <pre><code>## [1] NaN</code></pre>
 <p>Ara que hem creat diversos objectes, aquests es troben emmagatzemats a l’entorn de treball. Per veure quins objectes tenim:</p>
 <pre class="r"><code>objects()</code></pre>
-<pre><code>## [1] &quot;a&quot;        &quot;b&quot;        &quot;edad&quot;     &quot;elmeunom&quot; &quot;letras&quot;   &quot;mylog&quot;    &quot;x&quot;        &quot;xm&quot;</code></pre>
+<pre><code>##  [1] &quot;a&quot;                   &quot;amount&quot;              &quot;b&quot;                   &quot;c&quot;                   &quot;ceo&quot;                 &quot;ceo_girona&quot;         
+##  [7] &quot;ceo_indy&quot;            &quot;ceo_indy_dona&quot;       &quot;ceo_nacional&quot;        &quot;ceo_tarragona_joves&quot; &quot;city&quot;                &quot;country&quot;            
+## [13] &quot;edad&quot;                &quot;elmeunom&quot;            &quot;enter1&quot;              &quot;enter2&quot;              &quot;gap_africa_1962&quot;     &quot;gini&quot;               
+## [19] &quot;idea&quot;                &quot;letras&quot;              &quot;mylog&quot;               &quot;paisos&quot;              &quot;pibcap&quot;              &quot;pollution&quot;          
+## [25] &quot;population&quot;          &quot;pov&quot;                 &quot;poverty&quot;             &quot;sexe&quot;                &quot;size&quot;                &quot;temp_2020&quot;          
+## [31] &quot;unemployment&quot;        &quot;vector_caracter&quot;     &quot;vector_logic&quot;        &quot;wb&quot;                  &quot;x&quot;                   &quot;xm&quot;</code></pre>
 <pre class="r"><code>#És equivalent a:
 ls()</code></pre>
-<pre><code>## [1] &quot;a&quot;        &quot;b&quot;        &quot;edad&quot;     &quot;elmeunom&quot; &quot;letras&quot;   &quot;mylog&quot;    &quot;x&quot;        &quot;xm&quot;</code></pre>
+<pre><code>##  [1] &quot;a&quot;                   &quot;amount&quot;              &quot;b&quot;                   &quot;c&quot;                   &quot;ceo&quot;                 &quot;ceo_girona&quot;         
+##  [7] &quot;ceo_indy&quot;            &quot;ceo_indy_dona&quot;       &quot;ceo_nacional&quot;        &quot;ceo_tarragona_joves&quot; &quot;city&quot;                &quot;country&quot;            
+## [13] &quot;edad&quot;                &quot;elmeunom&quot;            &quot;enter1&quot;              &quot;enter2&quot;              &quot;gap_africa_1962&quot;     &quot;gini&quot;               
+## [19] &quot;idea&quot;                &quot;letras&quot;              &quot;mylog&quot;               &quot;paisos&quot;              &quot;pibcap&quot;              &quot;pollution&quot;          
+## [25] &quot;population&quot;          &quot;pov&quot;                 &quot;poverty&quot;             &quot;sexe&quot;                &quot;size&quot;                &quot;temp_2020&quot;          
+## [31] &quot;unemployment&quot;        &quot;vector_caracter&quot;     &quot;vector_logic&quot;        &quot;wb&quot;                  &quot;x&quot;                   &quot;xm&quot;</code></pre>
 <pre class="r"><code>#Un objecte es pot eliminar amb la funció remove o amb l&#39;equivalent, rm.
 rm(x)
 
