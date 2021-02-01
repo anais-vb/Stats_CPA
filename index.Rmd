@@ -1,23 +1,25 @@
 ---
-title: "Stats CPA"
+title: "Introducció a l'Estadística per a les Ciències Socials"
 ---
 
-## Benvinguts/des a introducció a l'Estadística per Ciències Socials 
-Benvinguts a la pàgina de materials i apunts bàsics per al seguiment de l'assignatura d'Introducció a l'Estadística al Grau en Ciències Polítiques i de l'Administració per al curs 2020/21. Aquesta pàgina té com a objectiu oferir un entorn més accessible per proporcionar materials, exemples i apunts per a seguir els continguts de l'assignatura.  
+Aquesta és la pàgina de materials i apunts bàsics per al seguiment de l'assignatura d'Introducció a l'Estadística al Grau en Ciències Polítiques i de l'Administració per al curs 2020/21. Aquesta pàgina té com a objectiu oferir un entorn més accessible per proporcionar materials, exemples i apunts per a seguir els continguts de l'assignatura.  
 
 Els continguts d'aquesta pàgina s'organitzen de la següent forma: 
-1. Primers passos amb R: introducció als elements bàsics. 
-2. Tipus de variables i eines d'ordenació amb R
-3. Anàlisi univariant i visualització de dades amb R
-4. Anàlisi bivariant i visualització de dades amb R 
-5. Breu introducció a l'anàlisi inferencial 
+- Primers passos amb R: introducció als elements bàsics. 
+- Tipus de variables i eines d'ordenació amb R.
+- Anàlisi univariant i visualització de dades amb R.
+- Anàlisi bivariant i visualització de dades amb R. 
+- Breu introducció a l'anàlisi inferencial 
 
 A més d'aquests continguts, es podran afegir continguts complementaris per ampliar, aprofundir o aclarir qüestions i dubtes que puguin sorgir a classe. 
 
+***
 
 ### *Important*: informació sobre el funcionament de l'assignatura
 
 Tota la informació rellevant sobre l'assignatura, qualificacions, entrega d'activitats i comunicacions amb el professorat es faran a través del moodle de l'assignatura. 
+
+***
 
 ### Autoria dels materials 
 Materials d'Introducció a l'Estadística en Ciències Socials by Anaïs Varo & Mario Ríos is licensed under Attribution-NonCommercial 4.0 International 
