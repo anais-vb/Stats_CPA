@@ -1,11 +1,17 @@
 ---
-title: "Primers passos"
+title: "Primeres passes"
 ---
 
-# Com funciona R?
-A la primera classe vam poder veure com instal·lar R, establir els directoris de treball i quina estructura té RStudio, així com les funcions de cadascuna de les parts de la interfície de treball (document - script - que tenim obert, la consola, l'entorn global i l'apartat de visualització). 
+En aquest apartat podreu trobar una introducció bàsica a R que tractarem durant les primeres sessions de classe. Els continguts que tractarem són: 
 
-Ara començarem a aprendre els rudiments de R.
+  1. Com funciona R: una introducció bàsica 
+  2. Configuració de directoris de treball 
+  3. Instal·lar i carregar paquets 
+  4. Incloure notes als scripts 
+  5. Demanar ajuda a R
+
+## Com funciona R?
+A les primeres sessions vam poder veure [com instal·lar R i RStudio](https://bookdown.org/gboccardo/manual-ED-UCH/instalacion-de-los-softwares-a-utilizar-en-este-manual.html), establir els directoris de treball, i quina estructura té RStudio, així com les funcions de cadascuna de les parts de la interfície de treball. Ara començarem a aprendre els rudiments de R.
 
 R és un llenguatge de programació. Això implica que interaccioneu amb el programa mitjançant codi. La sintaxi és un conjunt de codis. El seu ús en R és bastant intuïtiu i segueix un patró lògic.
 
@@ -28,10 +34,12 @@ Existeixen una sèrie de convencions quan treballem amb scripts que necessiteu s
 2. Altres objectes a R no necessiten parèntesi
 3. És possible que a vegades trobeu aquest tipus de terminologia: dplyr::mutate() - en aquests casos, s'utilitza aquest sistema per indicar clarament que la funció que utilitzem (mutate()) es troba dins el paquet dplyr. Normalment nosaltres carregarem els paquets a l'inici de la sessió pel que no haurem de recordar els paquets a cada funció, però a vegades trobareu aquest tipus de notacions en exemples a la web. 
 
+***
+
 ## Inclusió de notes al codi en script 
 L'editor de sintaxi accepta la inclusió de comentaris en el cos de codi. Quan anteposem el signe (#) abans d'un comandament, aquest es posa d'un color diferent als codis que representen instruccions vàlides (en la visualització per defecte de RStudio, el color serà automàticament verd).
 
-*Per a què serveix?* Tota línia que estigui amb aquest signe el programa la ignorarà com a codi R. Això permet incloure notes que indiquin el que s'està fent, missatges o ajudes de memòria, particularment quan treballem en un projecte que ens pot durar diversos dies - en els quals serà difícil recordar tot el que hagi fet o provat - i en contextos com l'entrega d'exercicis, treballs en grup, etc. 
+**Per a què serveix?** Tota línia que estigui amb aquest signe (#) el programa la ignorarà com a codi R. Això permet incloure notes que indiquin el que s'està fent, missatges o ajudes de memòria, particularment quan treballem en un projecte que ens pot durar diversos dies - en els quals serà difícil recordar tot el que hagi fet o provat - i en contextos com l'entrega d'exercicis, treballs en grup, etc. 
 
 ```{r}
 1+2*3 # Ens permet incloure notes 
@@ -41,6 +49,7 @@ L'editor de sintaxi accepta la inclusió de comentaris en el cos de codi. Quan a
 
 ```
 
+***
 
 ## Demanar ajuda
 En aquestes sessions us donarem algunes pistes per aprendre rudiments de R i com aplicar conceptes estadístics bàsics amb R. Ara bé, probablement no resoldrem tots els dubtes que us puguin sorgir i segur passaran coses entre sessions. En aquest apartat us donem algunes pistes perque trobeu ajuda de forma autònoma (per descomptat, ens podeu escriure un correu, però internet sol ser més ràpid).
@@ -71,93 +80,3 @@ example(mean)
 2. Busca a Google: no és broma. Si et quedes encallat Google i els milions de blogs d'ajuda a la xarxa són un gran recurs, particularment amb els errors (probablement algú ha estat en la teva mateixa situació abans i ha demanat ajuda!)
 
 3. Si Google no ajuda, pots provar llocs més especialitzats com https://stackoverflow.com/ . Primer tracta de buscar si algú ha resolt el dubte abans (navega una estona!). Si no trobes la resposta, pots penjar la teva pregunta amb un reprex (minimal reproducible example). 
-
-# Crear objectes 
-El comandament més bàsic a R consisteix en crear un objecte i assignar-li una dada numèrica. 
-
-```{r}
-x <- 10 # Assignar el valor de 10 a l'objecte x
-x
-```
-```{r}
-# Cambiar el valor de X per 5
-x <- 5
-x
-```
-*Atenció!* R és sensible a les majúscules, pel que X i x no seran el mateix. 
-
-## Tipus d'objectes a R
-R és un llenguatge orientat a objectes, això implica que els objectes seran molt importants. Quan treballem amb dades en ciències socials, molts cops aquests objectes seran variables (aquesta qüestió la veurem més endavant).
-
-1. numeric: valors numèrics , inclou decimals.
-```{r}
-a <- 3
-a
-```
-
-2. integer: valors numèrics , no inclou decimals.
-
-3. character: valors alfanumèrics, es a dir: lletres, números o signes barrejats. 
-```{r}
-elmeunom <- "Anais"
-elmeunom
-```
-4. logical: valors lògics, TRUE o FALSE.
-
-```{r}
-mylog <- TRUE
-mylog
-```
-## NA, Inf i NaN
-*Els valors NA representen els valors perduts (valors no disponibles)
-*Infinit positiu i negatiu es representen amb Inf i -Inf 
-```{r}
-1/0
-```
-```{r}
--5/0
-```
-A R, NaN significa 'Not a Number'
-
-```{r}
-sqrt(-4)
-```
-Ara que hem creat diversos objectes, aquests es troben emmagatzemats a l'entorn de treball. Per veure quins objectes tenim: 
-
-```{r}
-objects()
-
-#És equivalent a:
-ls()
-
-#Un objecte es pot eliminar amb la funció remove o amb l'equivalent, rm.
-rm(x)
-
-# Per esborrar l'entorn de treball:
-rm(list = ls())
-
-```
-
-
-##Vectors 
-
-Si els objectes creats contenen un conjunt de dades del mateix tipus, per a R això serà un VECTOR.
-
-```{r}
-#Concatenar valors per crear un vector de més d'un sol valor
-edad <- c(15, 12, 27, 55, 63, 63, 24,21, 70)
-edad
-class(edad) # Vector de tipus numeric 
-```
-```{r}
-#Vector numérico (función concatenar)
-a <- c(4, 3, 5) 
-
-#Vector numérico (función concatenar)
-b <- c(1.1, 4.67, 5.1, 6.8) 
-
-#Vector alfanumérico (función concatenar)
-letras <- c("hombre", "mujer", "no sabe/no responde")
-```
-
-A mida que creem nous objectes, vectors, a l'entorn de treball podem veure com apareixen nous objectes, amb la seva respectiva quantitat de casos i tipus d'objecte assignat pel programa. 
