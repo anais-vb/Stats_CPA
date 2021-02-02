@@ -36,13 +36,71 @@ Existeixen una sèrie de convencions quan treballem amb scripts que necessiteu s
 
 ***
 
+## Configurar el directori de treball 
+
+Abans de començar a treballar haurem de fixar el nostre directori on guardarem els fitxers que farem servir durant el curs. Hi ha dues maneres de poder-ho fer. En aquest curs, donat que per a l'elaboració de les pràctiques i per al vostre projecte final, haureu d'utilitzar bases de dades diferents, optarem per la segona opció. 
+
+### Opció 1: fixar un directori local 
+Per a fixar un directori local, haurem d'indicar a R quina és la ruta de la carpeta amb què volem treballar i la fixarem amb la funció setwd()
+
+```{r}
+#setwd("C:/ruta del directori")
+```
+Per a comprobar quina és la ruta local que estem utilitzant, farem servir la funció getdw()
+
+```{r}
+getwd()
+```
+
+### Opció 2: Projectes R
+En aquest cas, crearem un projecte de R que agruparà i vincularà tots els fitxers al projecte. Aquesta opció ens permet que, al compartir el projecte (per exemple, amb pràctiques) tots els fitxers que hem utilitzat també es comparteixin. En cas que ens enviessiu el script en què utilitzeu rutes locals, el que passaria és que no podriem executar-lo ja que ens redirigiria a una ruta del vostre ordinador que només és accessible a través del vostre terminal. Els projectes també seran útils si voleu **treballar des de diferents dispositius**. 
+
+Per a crear un projecte heu d'anar a FILE > NEW PROJECT > New Directory
+
+A continuació seleccionem el tipus de projecte, que en aquest cas és 'Empty Project' i li assignem un nom. A continuació li indiquem que volem crear el projecte. Aquesta acció crearà una carpeta amb aquest nom i al mateix temps assignarà un nom al projecte: la carpeta estarà a documents i es crearà un projecte amb el nom: nom_carpeta.Rproj 
+
+Si volem crear un projecte en una carpeta existent (per exemple, si ja tenim un directori creat per al curs d'estadística) fem clic al botó d'Existing Directory i a través de BROWSE seleccionem la carpeta i creem el projecte. 
+
+L'avantatge d'utilitzar projectes és que qualsevol fitxer que creem es guardarà en aquesta carpeta. 
+
+
+***
+
+## Instal·lar i carregar paquets 
+R està format per un sistema base (packages de R-base) però per extendre les seves funcionalitats podrem instal·lar i executar paquets addicionals. Els paquets són un conjunt de funcions, dades i documentació. 
+
+Quan instal·lem R, com hem dit, es carreguen automàticament 7 paquets de R-base. Per a veure aquests paquets pots teclejar a la consola: 
+
+```{r}
+loadedNamespaces()
+```
+
+La gran quantitat de paquets disponibles a R és una de les claus d'èxit del propi llenguatge per al seu ús en estadística. 
+
+Podem instal·lar paquets de diverses formes: 
+- A través del menú: *Toools > Install packages ...*
+- A través de l'escriptori de R (secció de miscelània, al requadre dret inferior de l'escriptori) a la pestanya de "Packages" podem veure quins paquets tenim instal·lats i carregats. 
+
+En la majoria de casos, utilitzarem la funció install.packages() al script o consola, i posarem el nom del paquet entre cometes. En aquest cas - per a practicar - instal·larem un paquet que conté diversos subpaquets i funcionalitats que utilitzarem al llarg del curs: el paquet [Tidyverse](https://www.tidyverse.org/): 
+
+```{r}
+install.packages("tidyverse")
+```
+Un cop instal·lat el paquet, l'haurem de carregar per a poder-lo utilitzar amb la funció library():
+
+```{r}
+library(tidyverse)
+```
+
+***
+
 ## Inclusió de notes al codi en script 
 L'editor de sintaxi accepta la inclusió de comentaris en el cos de codi. Quan anteposem el signe (#) abans d'un comandament, aquest es posa d'un color diferent als codis que representen instruccions vàlides (en la visualització per defecte de RStudio, el color serà automàticament verd).
 
 **Per a què serveix?** Tota línia que estigui amb aquest signe (#) el programa la ignorarà com a codi R. Això permet incloure notes que indiquin el que s'està fent, missatges o ajudes de memòria, particularment quan treballem en un projecte que ens pot durar diversos dies - en els quals serà difícil recordar tot el que hagi fet o provat - i en contextos com l'entrega d'exercicis, treballs en grup, etc. 
 
 ```{r}
-1+2*3 # Ens permet incloure notes 
+1+2*3 # Ens permet incloure notes i encapçalaments als nostres scripts
 
 #---------------------- ENCAPÇALAMENT -----------------------------
 1+1 
@@ -80,3 +138,4 @@ example(mean)
 2. Busca a Google: no és broma. Si et quedes encallat Google i els milions de blogs d'ajuda a la xarxa són un gran recurs, particularment amb els errors (probablement algú ha estat en la teva mateixa situació abans i ha demanat ajuda!)
 
 3. Si Google no ajuda, pots provar llocs més especialitzats com https://stackoverflow.com/ . Primer tracta de buscar si algú ha resolt el dubte abans (navega una estona!). Si no trobes la resposta, pots penjar la teva pregunta amb un reprex (minimal reproducible example). 
+
