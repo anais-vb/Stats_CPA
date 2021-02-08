@@ -11,7 +11,7 @@ navbar:
           href: primerspassos.html
         - text: "Importar i exportar arxius"
           href: importacio.html 
-        - text: "Objectes i funcions"
+        - text: "Objectes i funcions bàsiques"
           href: objectes.html 
       href: primerspassos.html
     - text: "Ordenació de variables"
