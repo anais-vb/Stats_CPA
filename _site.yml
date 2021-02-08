@@ -13,9 +13,9 @@ navbar:
           href: importacio.html 
         - text: "Objectes i funcions bàsiques"
           href: objectes.html 
-      href: primerspassos.html
     - text: "Ordenació de variables"
       href: ordenacio.html
+  search: true    
 output:
   html_document:
     theme: united
