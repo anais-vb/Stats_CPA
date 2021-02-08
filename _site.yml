@@ -5,7 +5,14 @@ navbar:
   left:
     - text: "Inici"
       href: index.html
-    - text: "Primers passos"
+    - text: "Elements bàsics"
+      menu:
+        - text: "Primeres passes"
+          href: primerspassos.html
+        - text: "Importar i exportar arxius"
+          href: importacio.html 
+        - text: "Objectes i funcions"
+          href: objectes.html 
       href: primerspassos.html
     - text: "Ordenació de variables"
       href: ordenacio.html
