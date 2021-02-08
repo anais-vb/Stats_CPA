@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Importació i exportació de dades</title>
+
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Stats CPA</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Inici</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Elements bàsics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="primerspassos.html">Primeres passes</a>
+    </li>
+    <li>
+      <a href="importacio.html">Importar i exportar arxius</a>
+    </li>
+    <li>
+      <a href="objectes.html">Objectes i funcions</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="ordenacio.html">Ordenació de variables</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Importació i exportació de dades</h1>
+
+</div>
+
+
+<div id="importar-i-exportar-dades" class="section level1">
+<h1>IMPORTAR I EXPORTAR DADES</h1>
+<p>En aquesta secció treballarem com importar i exportar dades en diferents formats a R. Per a aquestes tasques, treballarem amb els següents packets:</p>
+<pre class="r"><code>#install.packages(&quot;readr&quot;)
+#install.packages(&quot;haven&quot;)
+#library(readr)
+#library(haven)</code></pre>
+<div id="descarregar-dades-dinternet" class="section level2">
+<h2>1. Descarregar dades d’Internet</h2>
+<p>Moltes de les dades que podeu utilitzar en aquesta assignatura i en futures recerques quantitatives estan disponibles a Internet. Tot i que en molts casos les dades es poden descarregar directament des del navegador, en aquest apartat aprenem a fer-ho des de R.</p>
+<p>La mecànica és la mateixa que amb les funcions per a carregar dades des del nostre PC, però en comptes d’indicar una ruta local, indicarem una ruta d’internet (URL).</p>
+<pre class="r"><code>#Carreguem les dades del fitxer absentisme 
+url &lt;- &quot;http://pagines.uab.cat/plopez/sites/pagines.uab.cat.plopez/files/SexeSegur.sav&quot;
+df &lt;- read_spss(url)</code></pre>
+<p>Aquesta enquesta és una Enquesta sobre Comportament sexual i sexe segur, realitzada per estudiants de la UAB a l’assignatura de Mètodes Quantitatius de Recerca Social de la titulació de Sociologia durant el curs 2013-14. Per a conèixer les variables d’aquesta base de dades podeu consultar el <a href="http://pagines.uab.cat/plopez/sites/pagines.uab.cat.plopez/files/Questionari_SexeSegur.pdf">Qüestionari</a> de l’enquesta.</p>
+<p>A vegades necessitarem fer una <strong>còpia de les dades</strong> al nostre ordinador. En aquest cas, cal carregar les dades i exportar-les, o bé utilitzar la funció download.file()</p>
+<pre class="r"><code># Descarregar i emmagatzemar les dades al nostre pc 
+url &lt;- &quot;http://pagines.uab.cat/plopez/sites/pagines.uab.cat.plopez/files/SexeSegur.sav&quot;
+destino &lt;- &quot;./dades/SexeSegur.sav&quot;
+download.file(url, destino)
+dat &lt;- read.csv(destino)</code></pre>
+<pre><code>## Warning in read.table(file = file, header = header, sep = sep, quote = quote, : line 1 appears to contain
+## embedded nulls</code></pre>
+<pre><code>## Warning in read.table(file = file, header = header, sep = sep, quote = quote, : line 2 appears to contain
+## embedded nulls</code></pre>
+<pre><code>## Warning in read.table(file = file, header = header, sep = sep, quote = quote, : line 3 appears to contain
+## embedded nulls</code></pre>
+<pre><code>## Warning in read.table(file = file, header = header, sep = sep, quote = quote, : line 4 appears to contain
+## embedded nulls</code></pre>
+<pre><code>## Warning in read.table(file = file, header = header, sep = sep, quote = quote, : incomplete final line
+## found by readTableHeader on &#39;./dades/SexeSegur.sav&#39;</code></pre>
+</div>
+<div id="exportar-i-importar-dades-tabulars-csv" class="section level2">
+<h2>2. Exportar i importar dades tabulars CSV</h2>
+<p>CSV significa ‘comma separated data’ i es tracta d0un cas particular de ‘tabular data’.</p>
+<p>Primer aprendrem a <strong>exportar en format CSV</strong> el fitxer que hem aconseguit d’Internet (que era format .SAV)</p>
+<pre class="r"><code># COMPTE! Heu de canviar aquesta ruta per la ruta local al vostre ordinador. 
+write_csv(df, file = &quot;C:/Users/avaro/Desktop/SexeSegur.csv&quot;)</code></pre>
+<p>També podeu optar per no posar la ruta completa i només posar el nom de l’arxiu. En aquest cas, R el guardarà al directori de treball per defecte. Recordeu que podeu consultar on és el vostre directori de treball amb la funció getwd() i fixar-la amb setwd().</p>
+<p><strong>TREBALLAR PER PROJECTES:</strong> Com sabeu, us recomanem treballar per prokectes i guardar els fitxers en una carpeta que es digui ‘dades’. Per tant, ara exportarem les dades de SexeSegur a la subcarpeta dades del projecte</p>
+<pre class="r"><code>write_csv(df, &quot;./dades/SexeSegur.csv&quot;)</code></pre>
+<p>Hi haurà diversos paràmetres a la funció wrtie_csv() que us poden ser d’ajuda quan necessiteu indicar a R aspectes particulars de la base de dades que voleu exportar/importar. Per a conèixer-los, utilitzeu la funció help()</p>
+<p>Per a <strong>importar fitxers CSV</strong> farem el següent: importarem les dades del fitxer SexeSegur en CSV i crearem un objecte que es dirà SexeSegur_csv. Recordeu que fa un moment hem guardat el fitxer a la carpeta de dades del vostre projecte.</p>
+<pre class="r"><code>SexeSegur_csv &lt;- read_csv(&quot;./dades/SexeSegur.csv&quot;)</code></pre>
+<pre><code>## 
+## -- Column specification ---------------------------------------------------------------------------------
+## cols(
+##   .default = col_double(),
+##   ID = col_character(),
+##   Data = col_date(format = &quot;&quot;),
+##   Hora = col_time(format = &quot;&quot;),
+##   P.7.1 = col_character(),
+##   P.7.2 = col_character(),
+##   P.7.3 = col_character(),
+##   Observacions = col_character()
+## )
+## i Use `spec()` for the full column specifications.</code></pre>
+<p><em>IMPORTANT:</em> Importar i exportar dades a CSV és molt útil ja que la majoria de programes permeten llegir i exportar les dades a CSV.</p>
+</div>
+<div id="exportar-i-importar-dades-dexcel" class="section level2">
+<h2>3. Exportar i importar dades d’EXCEL</h2>
+<p>Hi ha diversos paquets que ens poden ser útils per als fitxers excel, però utilitzarem el xlsx. Com veureu, la mecànica que hem utilitzat pels fitxers CSV s’anirà repetint en els diferents tipus d’arxius, variant els paquets que utilitzarem.</p>
+<pre class="r"><code>#install.packages(&quot;xlsx&quot;)
+#library(xlsx)</code></pre>
+<p>La funció write.xlsx permet especificar el nom del llibre (SheetName) i afegir dades a un arxiu preexistent (amb el paràmetre append=TRUE)</p>
+<pre class="r"><code>#write.xlsx(iris, &quot;./dades/SexeSegur.xlsx&quot;, sheetName = &quot;SexeSegur_2&quot;, append = TRUE)</code></pre>
+<p>Per importar dades utilitzarem el paquet readxl</p>
+<pre class="r"><code>#install.packages(&quot;readxl&quot;)
+#library(readxl)</code></pre>
+<p>readxl permet llegir fitxers .xls y .xlsx, com podeu veure:</p>
+<pre class="r"><code>SexeSegur_xls &lt;- read_excel(&quot;./dades/SexeSegur.xlsx&quot;)</code></pre>
+<pre><code>## New names:
+## * `` -&gt; ...1</code></pre>
+<pre class="r"><code># Podeu especificar quina fulla d&#39;Excel voleu obrir indicant la seva posició o el seu nom: 
+# SexeSegur_xls &lt;- read_excel(&quot;./dades/SexeSegur.xlsx&quot;, sheet = 1)
+# SexeSegur_xls &lt;- read_excel(&quot;./dades/SexeSegur.xlsx&quot;, sheet = &quot;SexeSegur_2&quot;)</code></pre>
+</div>
+<div id="exportar-i-importar-dades-de-spss" class="section level2">
+<h2>4. Exportar i importar dades de SPSS</h2>
+<p>A continuació veurem com importar i exportar fitxers SPSS:</p>
+<pre class="r"><code>#Exportació a SPSS (formato .sav)
+# library(haven)
+write_sav(df, &quot;./dades/SexeSegur.sav&quot;)
+
+
+#ImportaciÓ de ficheros .sav (tb .por)
+# library(haven)
+SexeSegur_spss &lt;- read_spss(&quot;./dades/SexeSegur.sav&quot;)</code></pre>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

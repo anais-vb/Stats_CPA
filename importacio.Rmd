@@ -1,0 +1,109 @@
+---
+title: "Importació i exportació de dades"
+---
+
+# IMPORTAR I EXPORTAR DADES 
+En aquesta secció treballarem com importar i exportar dades en diferents formats a R. Per a aquestes tasques, treballarem amb els següents packets: 
+
+```{r}
+#install.packages("readr")
+#install.packages("haven")
+#library(readr)
+#library(haven)
+```
+
+## 1. Descarregar dades d'Internet 
+Moltes de les dades que podeu utilitzar en aquesta assignatura i en futures recerques quantitatives estan disponibles a Internet. Tot i que en molts casos les dades es poden descarregar directament des del navegador, en aquest apartat aprenem a fer-ho des de R. 
+
+La mecànica és la mateixa que amb les funcions per a carregar dades des del nostre PC, però en comptes d'indicar una ruta local, indicarem una ruta d'internet (URL). 
+
+```{r}
+#Carreguem les dades del fitxer absentisme 
+url <- "http://pagines.uab.cat/plopez/sites/pagines.uab.cat.plopez/files/SexeSegur.sav"
+df <- read_spss(url)
+```
+
+Aquesta enquesta és una Enquesta sobre Comportament sexual i sexe segur, realitzada per estudiants de la UAB a l'assignatura de Mètodes Quantitatius de Recerca Social de la titulació de Sociologia durant el curs 2013-14. Per a conèixer les variables d'aquesta base de dades podeu consultar el [Qüestionari](http://pagines.uab.cat/plopez/sites/pagines.uab.cat.plopez/files/Questionari_SexeSegur.pdf) de l'enquesta. 
+
+A vegades necessitarem fer una **còpia de les dades** al nostre ordinador. En aquest cas, cal carregar les dades i exportar-les, o bé utilitzar la funció download.file()
+
+```{r}
+# Descarregar i emmagatzemar les dades al nostre pc 
+url <- "http://pagines.uab.cat/plopez/sites/pagines.uab.cat.plopez/files/SexeSegur.sav"
+destino <- "./dades/SexeSegur.sav"
+download.file(url, destino)
+dat <- read.csv(destino)
+```
+
+## 2. Exportar i importar dades tabulars CSV 
+CSV significa 'comma separated data' i es tracta d0un cas particular de 'tabular data'. 
+
+Primer aprendrem a **exportar en format CSV** el fitxer que hem aconseguit d'Internet (que era format .SAV) 
+
+```{r}
+# COMPTE! Heu de canviar aquesta ruta per la ruta local al vostre ordinador. 
+write_csv(df, file = "C:/Users/avaro/Desktop/SexeSegur.csv")
+```
+També podeu optar per no posar la ruta completa i només posar el nom de l'arxiu. En aquest cas, R el guardarà al directori de treball per defecte. Recordeu que podeu consultar on és el vostre directori de treball amb la funció getwd() i fixar-la amb setwd(). 
+
+**TREBALLAR PER PROJECTES:**
+Com sabeu, us recomanem treballar per prokectes i guardar els fitxers en una carpeta que es digui 'dades'. Per tant, ara exportarem les dades de SexeSegur a la subcarpeta dades del projecte 
+
+```{r}
+write_csv(df, "./dades/SexeSegur.csv")
+```
+
+Hi haurà diversos paràmetres a la funció wrtie_csv() que us poden ser d'ajuda quan necessiteu indicar a R aspectes particulars de la base de dades que voleu exportar/importar. Per a conèixer-los, utilitzeu la funció help()
+
+Per a **importar fitxers CSV** farem el següent: importarem les dades del fitxer SexeSegur en CSV i crearem un objecte que es dirà SexeSegur_csv. Recordeu que fa un moment hem guardat el fitxer a la carpeta de dades del vostre projecte. 
+
+```{r}
+SexeSegur_csv <- read_csv("./dades/SexeSegur.csv")
+```
+
+*IMPORTANT:* Importar i exportar dades a CSV és molt útil ja que la majoria de programes permeten llegir i exportar les dades a CSV. 
+
+## 3. Exportar i importar dades d'EXCEL 
+Hi ha diversos paquets que ens poden ser útils per als fitxers excel, però utilitzarem el xlsx. Com veureu, la mecànica que hem utilitzat pels fitxers CSV s'anirà repetint en els diferents tipus d'arxius, variant els paquets que utilitzarem. 
+
+```{r}
+#install.packages("xlsx")
+#library(xlsx)
+```
+
+La funció write.xlsx permet especificar el nom del llibre (SheetName) i afegir dades a un arxiu preexistent (amb el paràmetre append=TRUE)
+
+```{r}
+#write.xlsx(iris, "./dades/SexeSegur.xlsx", sheetName = "SexeSegur_2", append = TRUE)
+```
+
+Per importar dades utilitzarem el paquet readxl
+
+```{r}
+#install.packages("readxl")
+#library(readxl)
+```
+
+readxl permet llegir fitxers .xls y .xlsx, com podeu veure:
+
+```{r}
+SexeSegur_xls <- read_excel("./dades/SexeSegur.xlsx")
+# Podeu especificar quina fulla d'Excel voleu obrir indicant la seva posició o el seu nom: 
+# SexeSegur_xls <- read_excel("./dades/SexeSegur.xlsx", sheet = 1)
+# SexeSegur_xls <- read_excel("./dades/SexeSegur.xlsx", sheet = "SexeSegur_2")
+
+```
+
+## 4. Exportar i importar dades de SPSS 
+A continuació veurem com importar i exportar fitxers SPSS: 
+
+```{r}
+#Exportació a SPSS (formato .sav)
+# library(haven)
+write_sav(df, "./dades/SexeSegur.sav")
+
+
+#ImportaciÓ de ficheros .sav (tb .por)
+# library(haven)
+SexeSegur_spss <- read_spss("./dades/SexeSegur.sav")
+```
