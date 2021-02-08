@@ -285,8 +285,23 @@ $(document).ready(function () {
         <li>
   <a href="index.html">Inici</a>
 </li>
-<li>
-  <a href="primerspassos.html">Primers passos</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Elements bàsics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="primerspassos.html">Primeres passes</a>
+    </li>
+    <li>
+      <a href="importacio.html">Importar i exportar arxius</a>
+    </li>
+    <li>
+      <a href="objectes.html">Objectes i funcions bàsiques</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="ordenacio.html">Ordenació de variables</a>
@@ -362,21 +377,23 @@ $(document).ready(function () {
 <p>R està format per un sistema base (packages de R-base) però per extendre les seves funcionalitats podrem instal·lar i executar paquets addicionals. Els paquets són un conjunt de funcions, dades i documentació.</p>
 <p>Quan instal·lem R, com hem dit, es carreguen automàticament 7 paquets de R-base. Per a veure aquests paquets pots teclejar a la consola:</p>
 <pre class="r"><code>loadedNamespaces()</code></pre>
-<pre><code>##  [1] &quot;Rcpp&quot;       &quot;gapminder&quot;  &quot;cellranger&quot; &quot;pillar&quot;     &quot;compiler&quot;   &quot;dbplyr&quot;     &quot;methods&quot;   
-##  [8] &quot;forcats&quot;    &quot;utils&quot;      &quot;tools&quot;      &quot;grDevices&quot;  &quot;digest&quot;     &quot;lubridate&quot;  &quot;jsonlite&quot;  
-## [15] &quot;evaluate&quot;   &quot;lifecycle&quot;  &quot;tibble&quot;     &quot;gtable&quot;     &quot;pkgconfig&quot;  &quot;rlang&quot;      &quot;reprex&quot;    
-## [22] &quot;cli&quot;        &quot;rstudioapi&quot; &quot;DBI&quot;        &quot;yaml&quot;       &quot;haven&quot;      &quot;xfun&quot;       &quot;withr&quot;     
-## [29] &quot;stringr&quot;    &quot;xml2&quot;       &quot;dplyr&quot;      &quot;httr&quot;       &quot;knitr&quot;      &quot;fs&quot;         &quot;generics&quot;  
-## [36] &quot;vctrs&quot;      &quot;graphics&quot;   &quot;datasets&quot;   &quot;stats&quot;      &quot;hms&quot;        &quot;grid&quot;       &quot;tidyselect&quot;
-## [43] &quot;glue&quot;       &quot;base&quot;       &quot;R6&quot;         &quot;fansi&quot;      &quot;readxl&quot;     &quot;rmarkdown&quot;  &quot;readr&quot;     
-## [50] &quot;modelr&quot;     &quot;purrr&quot;      &quot;tidyr&quot;      &quot;ggplot2&quot;    &quot;magrittr&quot;   &quot;backports&quot;  &quot;scales&quot;    
-## [57] &quot;ellipsis&quot;   &quot;htmltools&quot;  &quot;rvest&quot;      &quot;assertthat&quot; &quot;tidyverse&quot;  &quot;colorspace&quot; &quot;utf8&quot;      
-## [64] &quot;stringi&quot;    &quot;munsell&quot;    &quot;broom&quot;      &quot;crayon&quot;</code></pre>
+<pre><code>##  [1] &quot;tidyselect&quot; &quot;xfun&quot;       &quot;purrr&quot;      &quot;rJava&quot;      &quot;haven&quot;      &quot;colorspace&quot; &quot;vctrs&quot;     
+##  [8] &quot;generics&quot;   &quot;htmltools&quot;  &quot;yaml&quot;       &quot;grDevices&quot;  &quot;utf8&quot;       &quot;rlang&quot;      &quot;pillar&quot;    
+## [15] &quot;withr&quot;      &quot;foreign&quot;    &quot;glue&quot;       &quot;DBI&quot;        &quot;tidyverse&quot;  &quot;dbplyr&quot;     &quot;modelr&quot;    
+## [22] &quot;readxl&quot;     &quot;lifecycle&quot;  &quot;stringr&quot;    &quot;munsell&quot;    &quot;gtable&quot;     &quot;cellranger&quot; &quot;rvest&quot;     
+## [29] &quot;evaluate&quot;   &quot;knitr&quot;      &quot;forcats&quot;    &quot;gapminder&quot;  &quot;curl&quot;       &quot;fansi&quot;      &quot;xlsxjars&quot;  
+## [36] &quot;broom&quot;      &quot;methods&quot;    &quot;Rcpp&quot;       &quot;readr&quot;      &quot;backports&quot;  &quot;scales&quot;     &quot;xlsx&quot;      
+## [43] &quot;jsonlite&quot;   &quot;fs&quot;         &quot;ggplot2&quot;    &quot;hms&quot;        &quot;stats&quot;      &quot;datasets&quot;   &quot;graphics&quot;  
+## [50] &quot;digest&quot;     &quot;stringi&quot;    &quot;dplyr&quot;      &quot;grid&quot;       &quot;cli&quot;        &quot;tools&quot;      &quot;magrittr&quot;  
+## [57] &quot;tibble&quot;     &quot;crayon&quot;     &quot;tidyr&quot;      &quot;pkgconfig&quot;  &quot;ellipsis&quot;   &quot;xml2&quot;       &quot;utils&quot;     
+## [64] &quot;reprex&quot;     &quot;lubridate&quot;  &quot;assertthat&quot; &quot;rmarkdown&quot;  &quot;base&quot;       &quot;httr&quot;       &quot;rstudioapi&quot;
+## [71] &quot;R6&quot;         &quot;compiler&quot;</code></pre>
 <p>La gran quantitat de paquets disponibles a R és una de les claus d’èxit del propi llenguatge per al seu ús en estadística.</p>
 <p>Podem instal·lar paquets de diverses formes: - A través del menú: <em>Toools &gt; Install packages …</em> - A través de l’escriptori de R (secció de miscelània, al requadre dret inferior de l’escriptori) a la pestanya de “Packages” podem veure quins paquets tenim instal·lats i carregats.</p>
 <p>En la majoria de casos, utilitzarem la funció install.packages() al script o consola, i posarem el nom del paquet entre cometes. En aquest cas - per a practicar - instal·larem un paquet que conté diversos subpaquets i funcionalitats que utilitzarem al llarg del curs: el paquet <a href="https://www.tidyverse.org/">Tidyverse</a>:</p>
 <pre class="r"><code>install.packages(&quot;tidyverse&quot;)</code></pre>
-<pre><code>## Error in install.packages : Updating loaded packages</code></pre>
+<pre><code>## Warning in install.packages :
+##   package &#39;tidyverse&#39; is in use and will not be installed</code></pre>
 <p>Un cop instal·lat el paquet, l’haurem de carregar per a poder-lo utilitzar amb la funció library():</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
 <hr />
@@ -401,7 +418,7 @@ $(document).ready(function () {
 <pre class="r"><code>#Per ajuda general 
 help.start()</code></pre>
 <pre><code>## If nothing happens, you should open
-## &#39;http://127.0.0.1:23859/doc/html/index.html&#39; yourself</code></pre>
+## &#39;http://127.0.0.1:15849/doc/html/index.html&#39; yourself</code></pre>
 <pre class="r"><code># Ajuda sobre una funció
 help(mean) # Equivalent to ?mean</code></pre>
 <p>L’ajuda apareixera a la pantalla d’ajuda de la dreta.</p>

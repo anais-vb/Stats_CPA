@@ -299,7 +299,7 @@ $(document).ready(function () {
       <a href="importacio.html">Importar i exportar arxius</a>
     </li>
     <li>
-      <a href="objectes.html">Objectes i funcions</a>
+      <a href="objectes.html">Objectes i funcions bàsiques</a>
     </li>
   </ul>
 </li>
@@ -328,8 +328,10 @@ $(document).ready(function () {
 <p>En aquesta secció treballarem com importar i exportar dades en diferents formats a R. Per a aquestes tasques, treballarem amb els següents packets:</p>
 <pre class="r"><code>#install.packages(&quot;readr&quot;)
 #install.packages(&quot;haven&quot;)
-#library(readr)
-#library(haven)</code></pre>
+#install.packages(&quot;foreign&quot;)
+library(readr)
+library(haven)
+library(foreign)</code></pre>
 <div id="descarregar-dades-dinternet" class="section level2">
 <h2>1. Descarregar dades d’Internet</h2>
 <p>Moltes de les dades que podeu utilitzar en aquesta assignatura i en futures recerques quantitatives estan disponibles a Internet. Tot i que en molts casos les dades es poden descarregar directament des del navegador, en aquest apartat aprenem a fer-ho des de R.</p>
@@ -386,12 +388,13 @@ write_csv(df, file = &quot;C:/Users/avaro/Desktop/SexeSegur.csv&quot;)</code></p
 <h2>3. Exportar i importar dades d’EXCEL</h2>
 <p>Hi ha diversos paquets que ens poden ser útils per als fitxers excel, però utilitzarem el xlsx. Com veureu, la mecànica que hem utilitzat pels fitxers CSV s’anirà repetint en els diferents tipus d’arxius, variant els paquets que utilitzarem.</p>
 <pre class="r"><code>#install.packages(&quot;xlsx&quot;)
-#library(xlsx)</code></pre>
+library(xlsx)</code></pre>
 <p>La funció write.xlsx permet especificar el nom del llibre (SheetName) i afegir dades a un arxiu preexistent (amb el paràmetre append=TRUE)</p>
-<pre class="r"><code>#write.xlsx(iris, &quot;./dades/SexeSegur.xlsx&quot;, sheetName = &quot;SexeSegur_2&quot;, append = TRUE)</code></pre>
+<pre class="r"><code>write.xlsx(iris, &quot;./dades/SexeSegur.xlsx&quot;)
+#write.xlsx(iris, &quot;./dades/SexeSegur.xlsx&quot;, sheetName = &quot;SexeSegur_2&quot;, append = TRUE)</code></pre>
 <p>Per importar dades utilitzarem el paquet readxl</p>
 <pre class="r"><code>#install.packages(&quot;readxl&quot;)
-#library(readxl)</code></pre>
+library(readxl)</code></pre>
 <p>readxl permet llegir fitxers .xls y .xlsx, com podeu veure:</p>
 <pre class="r"><code>SexeSegur_xls &lt;- read_excel(&quot;./dades/SexeSegur.xlsx&quot;)</code></pre>
 <pre><code>## New names:

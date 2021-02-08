@@ -1,3 +1,6 @@
 ---
 title: "Objectes a R"
 ---
+
+# Objectes i funcions a R
+En aquest apartat aprendrem els rudiments bàsics de codi i programació amb R. Aquestes sessions seran importants perquè domineu els aspectes bàsics de R i pogueu avançar en l'assignatura satisfactòriament. 

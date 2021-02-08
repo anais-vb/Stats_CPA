@@ -8,8 +8,10 @@ En aquesta secció treballarem com importar i exportar dades en diferents format
 ```{r}
 #install.packages("readr")
 #install.packages("haven")
-#library(readr)
-#library(haven)
+#install.packages("foreign")
+library(readr)
+library(haven)
+library(foreign)
 ```
 
 ## 1. Descarregar dades d'Internet 
@@ -68,12 +70,13 @@ Hi ha diversos paquets que ens poden ser útils per als fitxers excel, però uti
 
 ```{r}
 #install.packages("xlsx")
-#library(xlsx)
+library(xlsx)
 ```
 
 La funció write.xlsx permet especificar el nom del llibre (SheetName) i afegir dades a un arxiu preexistent (amb el paràmetre append=TRUE)
 
 ```{r}
+write.xlsx(iris, "./dades/SexeSegur.xlsx")
 #write.xlsx(iris, "./dades/SexeSegur.xlsx", sheetName = "SexeSegur_2", append = TRUE)
 ```
 
@@ -81,7 +84,7 @@ Per importar dades utilitzarem el paquet readxl
 
 ```{r}
 #install.packages("readxl")
-#library(readxl)
+library(readxl)
 ```
 
 readxl permet llegir fitxers .xls y .xlsx, com podeu veure:
