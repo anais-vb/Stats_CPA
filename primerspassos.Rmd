@@ -10,7 +10,7 @@ En aquest apartat podreu trobar una introducció bàsica a R que tractarem duran
   4. Incloure notes als scripts 
   5. Demanar ajuda a R
 
-## Com funciona R?
+## 1. Com funciona R?
 A les primeres sessions vam poder veure [com instal·lar R i RStudio](https://bookdown.org/gboccardo/manual-ED-UCH/instalacion-de-los-softwares-a-utilizar-en-este-manual.html), establir els directoris de treball, i quina estructura té RStudio, així com les funcions de cadascuna de les parts de la interfície de treball. Ara començarem a aprendre els rudiments de R.
 
 R és un llenguatge de programació. Això implica que interaccioneu amb el programa mitjançant codi. La sintaxi és un conjunt de codis. El seu ús en R és bastant intuïtiu i segueix un patró lògic.
@@ -30,17 +30,52 @@ Escriure les intruccions a l'editor de sintaxis ens permet tenir una sintaxi edi
 
 Existeixen una sèrie de convencions quan treballem amb scripts que necessiteu saber: 
 
-1. Les funcions sempre porten un parèntesi, com sum() o mean()
+1. Comandament més bàsic: la creació d'objectes. Cal tenir en compte que R treballa amb memòria temporal, pel que un cop s'executa el procés i es tanca el programa, l'operació i el seu resultat desapareix si no s'ha emmagatzemat. 
+
+```{r}
+#Assignació del valor '10' a l'objecte X
+
+X <- 10
+X
+```
+Podeu veure, que aquest objecte el podem reescriure en qualsevol moment.
+
+```{r}
+X <- 5
+X
+```
+L'estructura de la sintaxi computacional és bastant flexible. Només a tall d'exemple, pot executar  una assignació d'un valor a un objecte alterant l'ordre dels elements. Val la pena destacar que l'ordre dels elements no altera el resultat, mentre el assignador apunt des dels valors que ens interessa guardar cap el nom d'un objecte a crear (o prèviament existent). Tanmateix això, per una qüestió d'ordre suggerim l'estructura de sintaxi objecte <- valors, amb el assignador apuntant cap a l'esquerra de la pantalla.
+
+```{r}
+# Exemples alternatius d'assignació de valors a objectes 
+
+10 -> X
+X
+
+X = 5
+X
+```
+2. Les funcions sempre porten un parèntesi, com sum() o mean()
+```{r}
+X <- c(6, 14, 20)
+mean(X)
+```
+
 2. Altres objectes a R no necessiten parèntesi
+
+```{r}
+#Si volem imprimir un objecte, el podem escriure i executar directament 
+X
+```
 3. És possible que a vegades trobeu aquest tipus de terminologia: dplyr::mutate() - en aquests casos, s'utilitza aquest sistema per indicar clarament que la funció que utilitzem (mutate()) es troba dins el paquet dplyr. Normalment nosaltres carregarem els paquets a l'inici de la sessió pel que no haurem de recordar els paquets a cada funció, però a vegades trobareu aquest tipus de notacions en exemples a la web. 
 
 ***
 
-## Configurar el directori de treball 
+## 2. Configurar el directori de treball 
 
 Abans de començar a treballar haurem de fixar el nostre directori on guardarem els fitxers que farem servir durant el curs. Hi ha dues maneres de poder-ho fer. En aquest curs, donat que per a l'elaboració de les pràctiques i per al vostre projecte final, haureu d'utilitzar bases de dades diferents, optarem per la segona opció. 
 
-### Opció 1: fixar un directori local 
+### 2.1) Opció 1: fixar un directori local 
 Per a fixar un directori local, haurem d'indicar a R quina és la ruta de la carpeta amb què volem treballar i la fixarem amb la funció setwd()
 
 ```{r}
@@ -52,7 +87,7 @@ Per a comprobar quina és la ruta local que estem utilitzant, farem servir la fu
 getwd()
 ```
 
-### Opció 2: Projectes R
+### 2.2) Opció 2: Projectes R
 En aquest cas, crearem un projecte de R que agruparà i vincularà tots els fitxers al projecte. Aquesta opció ens permet que, al compartir el projecte (per exemple, amb pràctiques) tots els fitxers que hem utilitzat també es comparteixin. En cas que ens enviessiu el script en què utilitzeu rutes locals, el que passaria és que no podriem executar-lo ja que ens redirigiria a una ruta del vostre ordinador que només és accessible a través del vostre terminal. Els projectes també seran útils si voleu **treballar des de diferents dispositius**. 
 
 Per a crear un projecte heu d'anar a FILE > NEW PROJECT > New Directory
@@ -66,7 +101,7 @@ L'avantatge d'utilitzar projectes és que qualsevol fitxer que creem es guardar�
 
 ***
 
-## Instal·lar i carregar paquets 
+## 3. Instal·lar i carregar paquets 
 R està format per un sistema base (packages de R-base) però per extendre les seves funcionalitats podrem instal·lar i executar paquets addicionals. Els paquets són un conjunt de funcions, dades i documentació. 
 
 Quan instal·lem R, com hem dit, es carreguen automàticament 7 paquets de R-base. Per a veure aquests paquets pots teclejar a la consola: 
@@ -94,7 +129,7 @@ library(tidyverse)
 
 ***
 
-## Inclusió de notes al codi en script 
+## 4. Inclusió de notes al codi en script 
 L'editor de sintaxi accepta la inclusió de comentaris en el cos de codi. Quan anteposem el signe (#) abans d'un comandament, aquest es posa d'un color diferent als codis que representen instruccions vàlides (en la visualització per defecte de RStudio, el color serà automàticament verd).
 
 **Per a què serveix?** Tota línia que estigui amb aquest signe (#) el programa la ignorarà com a codi R. Això permet incloure notes que indiquin el que s'està fent, missatges o ajudes de memòria, particularment quan treballem en un projecte que ens pot durar diversos dies - en els quals serà difícil recordar tot el que hagi fet o provat - i en contextos com l'entrega d'exercicis, treballs en grup, etc. 
@@ -109,7 +144,7 @@ L'editor de sintaxi accepta la inclusió de comentaris en el cos de codi. Quan a
 
 ***
 
-## Demanar ajuda
+## 5. Demanar ajuda
 En aquestes sessions us donarem algunes pistes per aprendre rudiments de R i com aplicar conceptes estadístics bàsics amb R. Ara bé, probablement no resoldrem tots els dubtes que us puguin sorgir i segur passaran coses entre sessions. En aquest apartat us donem algunes pistes perque trobeu ajuda de forma autònoma (per descomptat, ens podeu escriure un correu, però internet sol ser més ràpid).
 
 1. Busca a la documentació de RStudio. 
