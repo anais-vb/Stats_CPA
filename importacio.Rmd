@@ -2,7 +2,6 @@
 title: "Importació i exportació de dades"
 ---
 
-# IMPORTAR I EXPORTAR DADES 
 En aquesta secció treballarem com importar i exportar dades en diferents formats a R. Per a aquestes tasques, treballarem amb els següents packets: 
 
 ```{r}
@@ -23,6 +22,7 @@ La mecànica és la mateixa que amb les funcions per a carregar dades des del no
 #Carreguem les dades del fitxer absentisme 
 url <- "http://pagines.uab.cat/plopez/sites/pagines.uab.cat.plopez/files/SexeSegur.sav"
 df <- read_spss(url)
+df
 ```
 
 Aquesta enquesta és una Enquesta sobre Comportament sexual i sexe segur, realitzada per estudiants de la UAB a l'assignatura de Mètodes Quantitatius de Recerca Social de la titulació de Sociologia durant el curs 2013-14. Per a conèixer les variables d'aquesta base de dades podeu consultar el [Qüestionari](http://pagines.uab.cat/plopez/sites/pagines.uab.cat.plopez/files/Questionari_SexeSegur.pdf) de l'enquesta. 
@@ -31,10 +31,10 @@ A vegades necessitarem fer una **còpia de les dades** al nostre ordinador. En a
 
 ```{r}
 # Descarregar i emmagatzemar les dades al nostre pc 
-url <- "http://pagines.uab.cat/plopez/sites/pagines.uab.cat.plopez/files/SexeSegur.sav"
-destino <- "./dades/SexeSegur.sav"
-download.file(url, destino)
-dat <- read.csv(destino)
+#url <- "http://pagines.uab.cat/plopez/sites/pagines.uab.cat.plopez/files/SexeSegur.sav"
+#destino <- "./dades/SexeSegur.sav"
+#download.file(url, destino)
+#dat <- read.csv(destino)
 ```
 
 ## 2. Exportar i importar dades tabulars CSV 
@@ -44,7 +44,7 @@ Primer aprendrem a **exportar en format CSV** el fitxer que hem aconseguit d'Int
 
 ```{r}
 # COMPTE! Heu de canviar aquesta ruta per la ruta local al vostre ordinador. 
-write_csv(df, file = "C:/Users/avaro/Desktop/SexeSegur.csv")
+#write_csv(df, file = "C:/Users/avaro/Desktop/SexeSegur.csv")
 ```
 També podeu optar per no posar la ruta completa i només posar el nom de l'arxiu. En aquest cas, R el guardarà al directori de treball per defecte. Recordeu que podeu consultar on és el vostre directori de treball amb la funció getwd() i fixar-la amb setwd(). 
 
@@ -69,7 +69,7 @@ SexeSegur_csv <- read_csv("./dades/SexeSegur.csv")
 Hi ha diversos paquets que ens poden ser útils per als fitxers excel, però utilitzarem el xlsx. Com veureu, la mecànica que hem utilitzat pels fitxers CSV s'anirà repetint en els diferents tipus d'arxius, variant els paquets que utilitzarem. 
 
 ```{r}
-#install.packages("xlsx")
+install.packages("xlsx")
 library(xlsx)
 ```
 
@@ -83,7 +83,7 @@ write.xlsx(iris, "./dades/SexeSegur.xlsx")
 Per importar dades utilitzarem el paquet readxl
 
 ```{r}
-#install.packages("readxl")
+install.packages("readxl")
 library(readxl)
 ```
 
@@ -102,7 +102,7 @@ A continuació veurem com importar i exportar fitxers SPSS:
 
 ```{r}
 #Exportació a SPSS (formato .sav)
-# library(haven)
+library(haven)
 write_sav(df, "./dades/SexeSegur.sav")
 
 
