@@ -11,15 +11,24 @@
 
 
 
-<title>Objectes a R</title>
+<title>Objectes, estructures i elements bàsics</title>
 
-<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -34,11 +43,6 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -51,32 +55,6 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
 
 
 
@@ -87,10 +65,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -107,40 +81,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -168,7 +115,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -180,7 +127,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -191,10 +138,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -206,7 +166,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -314,18 +273,650 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
-<h1 class="title toc-ignore">Objectes a R</h1>
+<h1 class="title toc-ignore">Objectes, estructures i elements bàsics</h1>
 
 </div>
 
 
-<div id="objectes-i-funcions-a-r" class="section level1">
-<h1>Objectes i funcions a R</h1>
 <p>En aquest apartat aprendrem els rudiments bàsics de codi i programació amb R. Aquestes sessions seran importants perquè domineu els aspectes bàsics de R i pogueu avançar en l’assignatura satisfactòriament.</p>
+<div id="elements-bàsics-els-objectes-a-r" class="section level1">
+<h1>1. ELEMENTS BÀSICS: ELS OBJECTES A R</h1>
+<p>Com ja hem comentat, R funciona amb objectes. En aquest sentit totes les dades i estructures de dades a R seran objectes. En aquesta classe no entrarem en els detalls de què significa que un llenguatge de programació estigui orientat a objectes. El més important serà recordar que quan parlem d’un objecte estem parlant de qualsevol cosa que existeix a R i té un NOM</p>
+<p>A continuació crearem un objecte molt bàsic:</p>
+<pre class="r"><code>x &lt;- 3 # El signe &lt;- és l&#39;operador d&#39;assignació: assigna els valors de la dreta a l&#39;objecte de l&#39;esquerra
+x + 4 </code></pre>
+<pre><code>## [1] 7</code></pre>
+<p>Veiem que R entèn que el valor de x és 3, i per tant la suma dóna 7 . Hem de recordar que nosaltres escriurem el codi que volem executar al script però el <em>resultat (output)</em> sempre es reflexarà a la <em>consola</em>.</p>
+<div id="tipus-bàsics-de-dades" class="section level2">
+<h2>1.1 Tipus bàsics de dades</h2>
+<p>A R trobem cinc tipus bàsics de dades:</p>
+<ul>
+<li><em>Numeric</em>:nombres decimals</li>
+</ul>
+<pre class="r"><code>numero &lt;- 1.0 </code></pre>
+<ul>
+<li><em>Integers</em>:nombres enters</li>
+</ul>
+<pre class="r"><code>int &lt;- 1 </code></pre>
+<ul>
+<li><em>Character</em>: cadenes de text</li>
+</ul>
+<pre class="r"><code>char &lt;- &quot;un text&quot;</code></pre>
+<ul>
+<li><em>Complex</em>: nombres complexos</li>
+</ul>
+<pre class="r"><code>comp &lt;- 3-2i</code></pre>
+<ul>
+<li><em>Logical</em>: Vertader (TRUE) o fals (FALSE) - Sovint és el resultat d’operacions lògiques</li>
+</ul>
+<pre class="r"><code>a &lt;- 1
+b &lt;- 2
+logical &lt;- a &lt; b
+logical </code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>NA representa dades perdudes: R representa explícitament dades perdudes, omeses o que per algun motiu no hi són # Intentem recuperar una variable no contestada. NULL representa l’absència de dades: R intenta recuperar una dada i no troba res # Intentem recuperar una variable d’una unitat d’anàlisi que no existeix</p>
+<p>A vegades, depèn de les funcions que apliquem a les nostres dades passarà el fenomen de la <em>‘COERCIÓ’</em> La coerció passa quan demanem a R executar una operació i aquest coerciona (normalment sense avisar) les dades que li donem a un tipus correcte que li permeti realitzar l’operació. Les coercions ocorren en el següent ordre: logical -&gt; integer -&gt; numeric -&gt; character</p>
+<p>Per a verificar de quin tipus és una dada utilitzarem <code>&lt;class()&gt;</code></p>
+<pre class="r"><code>class(a)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>class(char)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>També podem verificar amb la familia de funcions <code>&lt;is()&gt;</code></p>
+<pre class="r"><code>is.integer(a)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>is.character(char)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>is.logical(a)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p><strong>[ABANS DE CONTINUAR] BREU REFERÈNCIA A LES FUNCIONS</strong></p>
+<p>Una funció és una sèrie d’operacions a què els hem assignats un nom. Les funcions accepten arguments, és a dir, especificacions sobre com han de funcionar. Quan ‘cridem’ una funció, es realitzen les operacions que conté, fent servir els arguments que hem establert. En R reconeixem a una funció perque sempre estarà en la notació: <code>&lt;nom_de_la_funció()&gt;</code></p>
+</div>
+<div id="els-factors" class="section level2">
+<h2>1.2 Els Factors</h2>
+<p>Els factors, són vectors unidimensional que inclou els valors corresponents a una variable categòrica, però també els diferents nivells possibles d’aquesta variable. Per exemple la variable sexe que inclou home i dona o la variable tipus de sang que inclou els tipus A, B, AB i O.</p>
+<pre class="r"><code>peso &lt;- c(&quot;Alto&quot;, &quot;Bajo&quot;, &quot;Bajo&quot;, &quot;Medio&quot;, &quot;Bajo&quot;, &quot;Medio&quot;, &quot;Alto&quot;) # Creem el vector &#39;peso&#39;
+class(peso)# Veiem que és un objecte de tipus &#39;character&#39; </code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>Ara el convertirem a factor:</p>
+<pre class="r"><code>peso_factor &lt;- as.factor(peso)
+peso </code></pre>
+<pre><code>## [1] &quot;Alto&quot;  &quot;Bajo&quot;  &quot;Bajo&quot;  &quot;Medio&quot; &quot;Bajo&quot;  &quot;Medio&quot; &quot;Alto&quot;</code></pre>
+<pre class="r"><code>peso_factor #Aparentment és el mateix. Què ha canviat? </code></pre>
+<pre><code>## [1] Alto  Bajo  Bajo  Medio Bajo  Medio Alto 
+## Levels: Alto Bajo Medio</code></pre>
+<p>Mirem les propietats i estructura dels dos objectes:</p>
+<pre class="r"><code>str(peso)</code></pre>
+<pre><code>##  chr [1:7] &quot;Alto&quot; &quot;Bajo&quot; &quot;Bajo&quot; &quot;Medio&quot; &quot;Bajo&quot; &quot;Medio&quot; &quot;Alto&quot;</code></pre>
+<pre class="r"><code>str(peso_factor)</code></pre>
+<pre><code>##  Factor w/ 3 levels &quot;Alto&quot;,&quot;Bajo&quot;,..: 1 2 2 3 2 3 1</code></pre>
+<p>Si ens fixem, el que està fent un factor en realitat és determinar uns nivells (levels) Els nivells, internament, s’identifiquen amb uns números i etiquetes. R compta la freqüència de cada nivell</p>
+<pre class="r"><code>summary(peso_factor)</code></pre>
+<pre><code>##  Alto  Bajo Medio 
+##     2     3     2</code></pre>
+</div>
+</div>
+<div id="operadors" class="section level1">
+<h1>2. OPERADORS</h1>
+<div id="operadors-aritmètics" class="section level2">
+<h2>2.1 Operadors aritmètics</h2>
+<p>Tipus d’operador per a operacions aritmètiques. És possible realitzar operacions aritmètiques amb dades de tipus enteres i numèriques. Aquests són: - suma (+) - resta (-) - multiplicació (*) - divisió (/) - potència (^) - divisió entera (%%)</p>
+<p><em>Incís</em>:La divisió entera és una divisió d’un nombre entre un altre però enlloc de retornar el quocient, ens torna el residu</p>
+<pre class="r"><code>4 %% 2 # Ens torna 0 perque és una divisió exacta </code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>5 %% 2 # Ens retorna 1 com a residu de l&#39;operació </code></pre>
+<pre><code>## [1] 1</code></pre>
+</div>
+<div id="operadors-relacionals" class="section level2">
+<h2>2.2 Operadors relacionals</h2>
+<p>Són utilitzats per a fer comparaciopns i sempre tornen com a resultat TRUE o FALSE. Els operadors són:</p>
+<ul>
+<li>menor que (&lt;)</li>
+<li>menor o igual que (&lt;=)</li>
+<li>major que (&gt;)</li>
+<li>major o igual que (&gt;=)</li>
+<li>Exactament igual que (==)</li>
+<li>No és igual que (!=)</li>
+</ul>
+<p>Amb els operadors relacionals podem comparar qualsevol tipus de dades <strong>Alerta!</strong> a l’utilitzar els operadors &gt;, &gt;=, &lt; i &lt;= en cadenes de text ja que tenen un comportament especial</p>
+<pre class="r"><code>&quot;vaixell&quot; &gt; &quot;casa&quot;</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>&quot;casa&quot; &gt; &quot;vaixell&quot;</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p><em>Per què creieu que passa això?</em></p>
+<p>Quan intentem comparar factors sempre obtindrem NA i una advertència de que aquests operadors no són significatius per a dades d’aquest tipus</p>
+<pre class="r"><code>as.factor(&quot;casa&quot;) &gt; &quot;vaixell&quot;</code></pre>
+<pre><code>## Warning in Ops.factor(as.factor(&quot;casa&quot;), &quot;vaixell&quot;): &#39;&gt;&#39; not meaningful for factors</code></pre>
+<pre><code>## [1] NA</code></pre>
+</div>
+<div id="operadors-logics" class="section level2">
+<h2>2.3 Operadors logics</h2>
+<p>Els operadors lògics s’utilitzen per operacions d’àlgebra booleana, és a dir, per a descriure relacions lògiques expressades com vertaderes o falses</p>
+<table>
+<thead>
+<tr class="header">
+<th>Operador</th>
+<th>Descripció</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&lt;x | y&gt;</code></td>
+<td>x O y és vertader. Exemple: TRUE</td>
+</tr>
+<tr class="even">
+<td><code>&lt;x &amp; y&gt;</code></td>
+<td>x I y són vertaders. Exemple: TRUE</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;!x&gt;</code></td>
+<td>x no és vertader (negació). Exemple: !TRUE –&gt; FALSE</td>
+</tr>
+<tr class="even">
+<td><code>&lt;isTRUE(X)&gt;</code></td>
+<td>x és vertader (afirmació). Exemple: isTRUE(TRUE) –&gt; TRUE</td>
+</tr>
+</tbody>
+</table>
+<p>Aquests operadors poden ser utilitzats amb dades de tipus numèric, lògic i complex. Sempre retornaran TRUE O FALSE. Per realitzar operacions lògiques tots els valors numèrics i complexes diferents a 0 són coercionats a TRUE, i 0 sempre es coerciona a FALSE</p>
+<pre class="r"><code>5 | TRUE </code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>5 &amp; FALSE</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>Aquests operadors es podran combinar per a expressar relacions complexes, i també es podran combinar amb operadors relacionals</p>
+<pre class="r"><code>!(FALSE | FALSE)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+</div>
+<div id="tipus-destructures-de-dades" class="section level1">
+<h1>3. TIPUS D’ESTRUCTURES DE DADES</h1>
+<div id="vectors" class="section level2">
+<h2>3.1 VECTORS</h2>
+<p>Són els elements més bàsics a R. Sempre conté elements de la mateixa classe. Tots els vectors tenen tres propietats: tipus (classe de dades que conté), Llargada (nombre d’elements), i atributs (metadades, però nosaltres no tractarem això)</p>
+<p>Hem dit que els vectors són la classe més senzilla d’objecte a R, quan veiem un número estem veient en realitat un vector de tipus numèric de un sol element de llargada</p>
+<pre class="r"><code>is.vector(3) #Podem verificar-ho amb una funció de la familia is()</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Podem utilitzar la funció <code>&lt;length()&gt;</code> per coneixer la seva llargada</p>
+<pre class="r"><code>length(3)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<p>Es poden crear amb la funció <code>&lt;c()&gt;</code> que significa concatenar o combinar</p>
+<pre class="r"><code>v &lt;- c(1.1, 10, 3.14)
+
+c(v, 555, v) # Fixem-nos que si no creem un nou objecte, aquesta operació de concatenar no es guardarà </code></pre>
+<pre><code>## [1]   1.10  10.00   3.14 555.00   1.10  10.00   3.14</code></pre>
+<pre class="r"><code>c(&quot;arbre&quot;, &quot;casa&quot;, &quot;persona&quot;)</code></pre>
+<pre><code>## [1] &quot;arbre&quot;   &quot;casa&quot;    &quot;persona&quot;</code></pre>
+<p>Pot ser de tots tipus (ex. logics) i podem crear vectors a partir de la combinació de vectors</p>
+<pre class="r"><code>vector1 &lt;- c (1,3,5)
+vector2 &lt;- c (2,4,6)
+
+vector3 &lt;- c(vector1, vector2)
+vector3</code></pre>
+<pre><code>## [1] 1 3 5 2 4 6</code></pre>
+<p>Si intentem combinar dades de diferents tipus en un mateix vector, R els coercionarà automàticament</p>
+<p>També podem crear seqüències numèriques utilitzant “:” - creant seqüències consecutives amb increments o decrements</p>
+<pre class="r"><code>1:10</code></pre>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<pre class="r"><code>10:1</code></pre>
+<pre><code>##  [1] 10  9  8  7  6  5  4  3  2  1</code></pre>
+<div id="vectorització-de-les-funcions" class="section level3">
+<h3>3.1.1) Vectorització de les funcions</h3>
+<p>Existeixen algunes operacions que a l’aplicar-les a un vector, s’apliquen a cadascun dels seus elements (vectorització). Les operacions aritmètiques i relacionals poden vectoritzar-se implicant que l’operació es realitza a cada element</p>
+<pre class="r"><code>vector_numeric &lt;- c(2,3,6,7,8,10,11)</code></pre>
+<p>Operacions aritmètiques:</p>
+<pre class="r"><code>vector_numeric + 2</code></pre>
+<pre><code>## [1]  4  5  8  9 10 12 13</code></pre>
+<pre class="r"><code>vector_numeric * 2</code></pre>
+<pre><code>## [1]  4  6 12 14 16 20 22</code></pre>
+</div>
+</div>
+<div id="matrius-i-arrays" class="section level2">
+<h2>3.2 MATRIUS I ARRAYS</h2>
+<p>Les matrius i arrays poden ser descrites com a vectors multidimensionals. A l’igual que un vector, únicament poden contenir dades d’un sol tipus, però a més de llarg, tenen més dimensions. En un sentit estricte, les matrius són una cas especial d’un array, que es distingeix per tenir específicament dues dimensions, un “llarg” “i un” alt ". - Les <em>matrius</em> són, per tant, una estructura amb forma rectangular, amb línies i columnes. - Els <em>arrays</em>, per la seva banda, poden tenir un nombre arbitrari de dimensions. Poden ser cubs, hipercubos i altres formes. El seu ús no és molt comú en R</p>
+<div id="creació-de-matrius-amb-la-funció-matrix" class="section level3">
+<h3>3.2.1 CREACIÓ DE MATRIUS amb la funció matrix()</h3>
+<pre class="r"><code>1:12 # Creem un vector numèric de l&#39;1 al 12</code></pre>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10 11 12</code></pre>
+<pre class="r"><code>matrix(1:12) # Sense especificar el nombre de columnes i files </code></pre>
+<pre><code>##       [,1]
+##  [1,]    1
+##  [2,]    2
+##  [3,]    3
+##  [4,]    4
+##  [5,]    5
+##  [6,]    6
+##  [7,]    7
+##  [8,]    8
+##  [9,]    9
+## [10,]   10
+## [11,]   11
+## [12,]   12</code></pre>
+<pre class="r"><code>matrix(1:12, nrow = 3, ncol = 4) # Tres files i quatre columnes </code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    4    7   10
+## [2,]    2    5    8   11
+## [3,]    3    6    9   12</code></pre>
+<pre class="r"><code>matrix(1:12, nrow = 4, ncol = 3) # quatre files i tres columnes </code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    5    9
+## [2,]    2    6   10
+## [3,]    3    7   11
+## [4,]    4    8   12</code></pre>
+<p>Les dades que intentem agrupar en una matriu seran acomodades en ordre, de dalt a baix, i d’esquerra a dreta, fins a formar un rectangle. Si multipliquem el nombre de línies pel nombre de columnes, obtindrem el nombre de cel·les de la matriu. En els exemple anteriors, el nombre de cel·les és igual a el nombre d’elements que volem acomodar, així que l’operació passa sense problemes.</p>
+<p>Quan intentem acomodar un nombre diferent d’elements i cel·les, passen dues coses diferents. Si el nombre d’elements és major a el nombre de cel·les, s’acomodaran totes les dades que siguin possibles i els altres s’ometran.</p>
+<pre class="r"><code>matrix(1:12, nrow = 3, ncol = 3)</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9</code></pre>
+<blockquote>
+<p><strong>RECICLATGE:</strong> Si, per contra, el nombre de cel·les és més gran que el nombre d’elements, aquests es reciclessin. Quant els elements siguin insuficients per a acomodar-se en les cel·les, R ens retornarà un advertiment i es comencessin a usar els elements a partir de el primer d’ells</p>
+</blockquote>
+<pre class="r"><code>matrix(1:12, nrow = 5, ncol = 4)</code></pre>
+<pre><code>## Warning in matrix(1:12, nrow = 5, ncol = 4): data length [12] is not a sub-multiple or multiple of the
+## number of rows [5]</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    6   11    4
+## [2,]    2    7   12    5
+## [3,]    3    8    1    6
+## [4,]    4    9    2    7
+## [5,]    5   10    3    8</code></pre>
+<p>Un altre procediment per crear matrius serà unir vectors amb les funcions: <code>&lt;cbind()&gt;</code> per unir vectors, utilitzant cada vector com a columna <code>&lt;rbind()&gt;</code> per unir vectors, utilitzant cada vector com a filera</p>
+<pre class="r"><code>vector_1 &lt;- 1:4
+vector_2 &lt;- 5:8
+vector_3 &lt;- 9:12
+vector_4 &lt;- 13:16
+
+matriu1 &lt;- rbind(vector_1, vector_2, vector_3, vector_4)
+matriu1</code></pre>
+<pre><code>##          [,1] [,2] [,3] [,4]
+## vector_1    1    2    3    4
+## vector_2    5    6    7    8
+## vector_3    9   10   11   12
+## vector_4   13   14   15   16</code></pre>
+<pre class="r"><code>matriu2 &lt;- cbind(vector_1, vector_2, vector_3, vector_4)
+matriu2</code></pre>
+<pre><code>##      vector_1 vector_2 vector_3 vector_4
+## [1,]        1        5        9       13
+## [2,]        2        6       10       14
+## [3,]        3        7       11       15
+## [4,]        4        8       12       16</code></pre>
+<p>Per últim, les matrius poden contenir NAs</p>
+<pre class="r"><code>vector_1 &lt;- c(NA, 1, 2)
+vector_2 &lt;- c(3,  4, NA)
+
+matriu3 &lt;- rbind(vector_1, vector_2)
+matriu3</code></pre>
+<pre><code>##          [,1] [,2] [,3]
+## vector_1   NA    1    2
+## vector_2    3    4   NA</code></pre>
+<p>Com que NA representa dades perdudes, pot estar present en companyia de tot tipus de de dades.</p>
+</div>
+<div id="propietats-de-les-matrius" class="section level3">
+<h3>3.2.2 PROPIETATS DE LES MATRIUS</h3>
+<p>Finalment, les operacions aritmètiques també són vectoritzades a l’aplicar-les a una matriu. L’operació és aplicada a cada un dels elements de la matriu</p>
+<pre class="r"><code>matriu4 &lt;- matrix (1:9, nrow = 3, ncol = 3)
+matriu4</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9</code></pre>
+<pre class="r"><code>matriu4 + 1 #Podem sumar</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    2    5    8
+## [2,]    3    6    9
+## [3,]    4    7   10</code></pre>
+<pre class="r"><code>matriu4 *2 # Multiplicar</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    2    8   14
+## [2,]    4   10   16
+## [3,]    6   12   18</code></pre>
+<pre class="r"><code>matriu4^3 # Elevar a la tercera potencia </code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1   64  343
+## [2,]    8  125  512
+## [3,]   27  216  729</code></pre>
+<p>Si intentem vectorizar una operació utilitzant una matriu amb Nas, aquesta s’aplicarà per als elements vàlids, retornant NA quan correspongui.</p>
+</div>
+</div>
+<div id="data-frames" class="section level2">
+<h2>3.3 DATA FRAMES</h2>
+<p>Els data frames o bases de dades són estructures de dades de dues dimensions que poden contenir dades de diferents tipus. És la més utilitzada per a realitzar anàlisi de dades Podem veure els data frames com una versió més flexible d’una matriu, ja que mentre una matriu només permet dades d’un sol tipus, el data frame permet ddes de diferents tipus en les seves fileres (però no en les columnes)</p>
+<p>En termes generals, les files d’un data frame representen casos, individuos o observacions. Les columnes representen atributs, trets o variables</p>
+<p>Iris és una famosa base de dades de Ronald Fisher que està inclosa en totes les instal·lacions de R i va molt bé per practicar:</p>
+<pre class="r"><code>head(iris) # la funció head ens mostra les primeres fileres d&#39;una base de dades</code></pre>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<p>Veiem que les primeres 5 files corresponen a cinc casos (en aquest cas flors) i les columnes són variables amb característiques de la flor (amplada i llarg del sèpal, amplada i llarg del petal i espècie). Un data frame està composat per vectors i cada vector correspon a un columna, podem assignar un nom a cada vector que serà el nom de la variable</p>
+<p>Crearem un data frame amb la funció data.frame():</p>
+<pre class="r"><code>base_dades &lt;- data.frame(
+  &quot;enter&quot; = 1:4, 
+  &quot;factor&quot; = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;), 
+  &quot;numero&quot; = c(1.2, 3.4, 4.5, 5.6), 
+  &quot;cadena&quot; = as.character (c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;))
+)
+
+base_dades</code></pre>
+<pre><code>##   enter factor numero cadena
+## 1     1      a    1.2      a
+## 2     2      b    3.4      b
+## 3     3      c    4.5      c
+## 4     4      d    5.6      d</code></pre>
+<div id="exploració-de-bases-de-dades" class="section level3">
+<h3>3.3.1 EXPLORACIÓ DE BASES DE DADES</h3>
+<p>La funció <code>&lt;dim&gt;</code> ens dóna les dimensions de la bd (llarg x ample o files x columnes)</p>
+<pre class="r"><code>dim(base_dades)</code></pre>
+<pre><code>## [1] 4 4</code></pre>
+<p>El llarg d’una bd és igual al seu número de columnes</p>
+<pre class="r"><code>length(base_dades)</code></pre>
+<pre><code>## [1] 4</code></pre>
+<p>La funció <code>&lt;names()&gt;</code> ens permet veure el nom de les columnes</p>
+<pre class="r"><code>names(base_dades)</code></pre>
+<pre><code>## [1] &quot;enter&quot;  &quot;factor&quot; &quot;numero&quot; &quot;cadena&quot;</code></pre>
+<p>La classe de d’estructura d’una base de dades és data.frame</p>
+<pre class="r"><code>class(base_dades)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<p>Si els vectors que fem servir per construir el data frame no són de la mateixa llarg, les dades NO es reciclaran: ens retornarà un error.</p>
+<pre class="r"><code>#base_dades2 &lt;- data.frame(
+ # &quot;enter&quot; = 1:3, 
+ # &quot;factor&quot; = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;), 
+ #  &quot;numero&quot; = c(1.2, 3.4, 4.5, 5.6), 
+ #  &quot;cadena&quot; = as.character (c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;)))</code></pre>
+</div>
+</div>
+<div id="llistes" class="section level2">
+<h2>3.4 LLISTES</h2>
+<p>Les llistes, com els vectors, són estructures de dades unidimensionals que només tenen ‘llarg’ A diferència dels vectors, cadascun dels seus elements pot ser de diferent tipus o, fins i tot, de diferent classe</p>
+<p>Podem tenir llistes que continguin dades, vectors, matrius, arrays, data.frames o altres llistes Aquesta darrera característica és el motiu pel qual les llistes es poden considerar un vector recursiu (un objecte que pot contenir elements de la seva mateixa classe)</p>
+<p>Crearem llistes amb la funció <code>&lt;list()&gt;</code>:</p>
+<pre class="r"><code>un_vector &lt;- 1:10
+una_matriu &lt;- matrix(1:4, nrow = 2)
+una_bd &lt;- data.frame(&quot;num&quot; = 1:3, &quot;let&quot; = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;))
+
+llista &lt;- list(&quot;vector&quot; = un_vector, &quot;matriu&quot; = una_matriu, &quot;base de dades&quot; = una_bd)
+llista</code></pre>
+<pre><code>## $vector
+##  [1]  1  2  3  4  5  6  7  8  9 10
+## 
+## $matriu
+##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4
+## 
+## $`base de dades`
+##   num let
+## 1   1   a
+## 2   2   b
+## 3   3   c</code></pre>
+<p>Podem crear llistes que contenen altres llistes</p>
+<pre class="r"><code>llista_recursiva &lt;- list(&quot;llista1&quot; = llista, &quot;llista2&quot; = llista)
+llista_recursiva</code></pre>
+<pre><code>## $llista1
+## $llista1$vector
+##  [1]  1  2  3  4  5  6  7  8  9 10
+## 
+## $llista1$matriu
+##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4
+## 
+## $llista1$`base de dades`
+##   num let
+## 1   1   a
+## 2   2   b
+## 3   3   c
+## 
+## 
+## $llista2
+## $llista2$vector
+##  [1]  1  2  3  4  5  6  7  8  9 10
+## 
+## $llista2$matriu
+##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4
+## 
+## $llista2$`base de dades`
+##   num let
+## 1   1   a
+## 2   2   b
+## 3   3   c</code></pre>
+</div>
+</div>
+<div id="què-són-les-funcions" class="section level1">
+<h1>4. QUÈ SÓN LES FUNCIONS?</h1>
+<p>R proporciona un gran ventall de funcions per a realitzar la majoria de tasques bàsiques d’analisi de dades. No obstant, a mida que avancem en anàlisis més complexes o bases de dades pròpies, serà habitual no trobaruna funció específica per allò que voleu fer En aquests casos, és normal que nosaltres haguem de crear la nostra pròpia funció amb codi o combinar altres funcions</p>
+<div id="quins-elements-té-una-funció" class="section level2">
+<h2>4.1 QUINS ELEMENTS TÉ UNA FUNCIÓ?</h2>
+<p>Una funció sempre té un nom, uns arguments i un cos. Les funcions definides per l’usuari tenen la següent estructura</p>
+<pre class="r"><code>nom &lt;- function(arguments) {
+  operacions
+}</code></pre>
+<p>Quan assignem una funció a un nom diem que hem definit una funció. Mirem els seus elements, un a un:</p>
+<ul>
+<li><p>El <strong>NOM</strong> ens permet executar-la i utilitzar-la. Els noms han de ser clars, no ambigus i descriptius</p></li>
+<li><p>Els <strong>ARGUMENTS</strong> són les variables que necessita la funció per a fer les operacions.</p>
+<ul>
+<li>Els valors són assignats al nom de l’argument per l’usuari cada cop que executa una funció</li>
+<li>Això permet que utilitzem les nostres funcions en diferents situacions i amb diferents dades (són com ‘PLANTILLES’)</li>
+<li>Els arguments poden ser dades, estructures, connexions a arxius, altres funcions, etc.</li>
+</ul></li>
+<li><p>El <strong>COS</strong> de la funció conté - entre claus {} - les operacions en ordre de com s’executaran</p>
+<ul>
+<li>Pot ser molt o poc complex - fins i tot podem definif una funció dins d’una altra funció</li>
+<li>Si el cos conté errors, les operacions no es realitzaran i ens tornarà un error a l’executar-la (R no avisa si la funció funcionarà fins que ho intentem)</li>
+</ul></li>
+</ul>
+</div>
+<div id="com-creem-una-funció" class="section level2">
+<h2>4.2 COM CREEM UNA FUNCIÓ?</h2>
+<p>En aquest exemple crearem una funció per calcular l’àrea d’un quadrilater (costat*costat)</p>
+<pre class="r"><code>area_quad &lt;- function(costat1, costat2) {
+  costat1*costat2
+}</code></pre>
+<p>En aquesta funció: - Nom: area_quad - Arguments: costat1, costat2 &lt;- seran les dades que necessitarà la nostra funció per a calcular l’àrea - Cos: l’operació costat1*costat2 escrita de forma que R la pugui interpretar</p>
+<p>Executarem la nostra funció per comprovar que funciona. Nota que l’únic que fem cada que la utilitzem és canviar la mesura dels costats de l’quadrilàter per al qual calcularem una àrea, en lloc d’escriure l’operació en cada ocasió</p>
+<pre class="r"><code>area_quad(costat1 = 2, costat2 = 3)</code></pre>
+<pre><code>## [1] 6</code></pre>
+<pre class="r"><code>area_quad(costat1 = 5, costat2 = 6)</code></pre>
+<pre><code>## [1] 30</code></pre>
+<pre class="r"><code># area_quad(costat1 = 2) # Si no assignem valors a un argument ens donarà un error </code></pre>
+<p>A R es poden especificar els arguments per posició. L’ordre dels arguments es determina quan creem una funció –&gt; en aquest cas nosaltres hem determinat que el primer argument és costat1 i el segon costat2, pel que podriem escriure:</p>
+<pre class="r"><code>area_quad(5,6) # Ara bé, al principi es recomana escriure el nom dels arguments per a fer més llegible el codi i no generar confusió </code></pre>
+<pre><code>## [1] 30</code></pre>
+</div>
+</div>
+<div id="subconjunts" class="section level1">
+<h1>5. SUBCONJUNTS</h1>
+<p>A R, podem obtenir subconjunts de les nostres estructures de dades. És a dir, podem extreure parts d’una estructura de dades (el nostre conjunt). Fem això per seleccionar dades que tenen característiques específiques, per exemple, tots els valors majors a cert nombre o aquells que coincideixen exactament amb un valor del nostre interès.</p>
+<p>Per a manipular i ordenar dades, en aquest curs utilitzarem les eines del paquet ‘TIDYVERSE’ com a introducció és necessari que conegueu algunes eines de R Base que combinareu amb el paquet tidyverse d’ordenació de dades</p>
+<div id="mètode-1-tidyverse-funcions-i-les-pipes" class="section level2">
+<h2>MÈTODE 1: TIDYVERSE (funcions i les ‘pipes’ %&gt;% )</h2>
+<p><strong><em>AQUEST SERÀ EL QUE UTILITZEM EN AQUESTA ASSIGNATURA</em></strong></p>
+<p>El ‘tidyvers’ es refereix al paquet tidyverse, el qual és un conjunt de paquets coherents, que tenen una gramàtica, filosofia i estructura similar. Tots es basen en la idea tidy data proposada per Hadley Wickham (Wickham et al, 2014).</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<p>Primer crearem una base de dades per treballar</p>
+<pre class="r"><code>base_dades2 &lt;- data.frame(
+  &quot;nom&quot; = c(&quot;Maria&quot;, &quot;Pep&quot;, &quot;Laura&quot;, &quot;Antoni&quot;), 
+  &quot;Grup&quot; = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;), 
+  &quot;edat&quot; = c(22, 24, 28, 31), 
+  &quot;nota&quot; = c(&quot;EXC&quot;, &quot;NOT&quot;, &quot;SUF&quot;, &quot;SUS&quot;), 
+  &quot;sexe&quot; = c(&quot;D&quot;, &quot;H&quot;, &quot;D&quot;, &quot;H&quot;)
+  )</code></pre>
+<div id="la-funció-select-per-extreure-columnes" class="section level3">
+<h3><em>La funció SELECT per extreure columnes</em></h3>
+<pre class="r"><code>?select
+
+select(base_dades2, nom) # Seleccionem la columna &#39;nom&#39;</code></pre>
+<pre><code>##      nom
+## 1  Maria
+## 2    Pep
+## 3  Laura
+## 4 Antoni</code></pre>
+<pre class="r"><code>select (base_dades2, 1, 2, 3) # Hem seleccionat les columnes en 1a, 2a i 3a posició </code></pre>
+<pre><code>##      nom Grup edat
+## 1  Maria    a   22
+## 2    Pep    b   24
+## 3  Laura    c   28
+## 4 Antoni    d   31</code></pre>
+<pre class="r"><code>select (base_dades2, -nom) # Equivalent a !nom, seleccionem totes les columnes excepte nom</code></pre>
+<pre><code>##   Grup edat nota sexe
+## 1    a   22  EXC    D
+## 2    b   24  NOT    H
+## 3    c   28  SUF    D
+## 4    d   31  SUS    H</code></pre>
+<p>Important, els resultats que obtenim amb les operacions de tidyverse sempre son DATAFRAMES. Si no guardem la dataframe, aquesta no crea un nou objecte:</p>
+<pre class="r"><code>base_dades3 &lt;- select (base_dades2, -nom)
+class(base_dades3) # Veiem que l&#39;objecte creat és una nova dataframe </code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+</div>
+<div id="la-funció-slice-i-filter-per-extreure-files" class="section level3">
+<h3><em>La funció SLICE i FILTER per extreure files</em></h3>
+<p>Slice ens permeten escollir entitats per la seva posició a les fileres:</p>
+<pre class="r"><code>base_dades2</code></pre>
+<pre><code>##      nom Grup edat nota sexe
+## 1  Maria    a   22  EXC    D
+## 2    Pep    b   24  NOT    H
+## 3  Laura    c   28  SUF    D
+## 4 Antoni    d   31  SUS    H</code></pre>
+<pre class="r"><code>slice (base_dades2, c(1,3)) # Estem escollint les fileres 1 i 3</code></pre>
+<pre><code>##     nom Grup edat nota sexe
+## 1 Maria    a   22  EXC    D
+## 2 Laura    c   28  SUF    D</code></pre>
+<pre class="r"><code>slice (base_dades2, 1:3)</code></pre>
+<pre><code>##     nom Grup edat nota sexe
+## 1 Maria    a   22  EXC    D
+## 2   Pep    b   24  NOT    H
+## 3 Laura    c   28  SUF    D</code></pre>
+<p>Filter ens permet triar entitats en funció de les propietats dels atributs</p>
+<pre class="r"><code>str(base_dades2) # Analitzem quines variables hi ha </code></pre>
+<pre><code>## &#39;data.frame&#39;:    4 obs. of  5 variables:
+##  $ nom : chr  &quot;Maria&quot; &quot;Pep&quot; &quot;Laura&quot; &quot;Antoni&quot;
+##  $ Grup: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;
+##  $ edat: num  22 24 28 31
+##  $ nota: chr  &quot;EXC&quot; &quot;NOT&quot; &quot;SUF&quot; &quot;SUS&quot;
+##  $ sexe: chr  &quot;D&quot; &quot;H&quot; &quot;D&quot; &quot;H&quot;</code></pre>
+<pre class="r"><code>?filter
+
+filter(base_dades2, edat &gt; 22)</code></pre>
+<pre><code>##      nom Grup edat nota sexe
+## 1    Pep    b   24  NOT    H
+## 2  Laura    c   28  SUF    D
+## 3 Antoni    d   31  SUS    H</code></pre>
+<pre class="r"><code>filter(base_dades2, edat &gt; 22 &amp; edat &lt; 30)</code></pre>
+<pre><code>##     nom Grup edat nota sexe
+## 1   Pep    b   24  NOT    H
+## 2 Laura    c   28  SUF    D</code></pre>
+<pre class="r"><code>filter(base_dades2, sexe == &quot;H&quot;)</code></pre>
+<pre><code>##      nom Grup edat nota sexe
+## 1    Pep    b   24  NOT    H
+## 2 Antoni    d   31  SUS    H</code></pre>
+</div>
+<div id="les-pipes" class="section level3">
+<h3><em>Les Pipes %&gt;%</em></h3>
+<p>Si us heu fixat les funcions a tidyverse sempre tenen la mateixa estructura d’arguments. En aquesta estructura sempre prenen la base de dades com a primer argument i retornen un dataframe. Aquesta estructura es descriu com el patró : data -&gt; transform -&gt; data</p>
+<p>Aquest paquet inclou una eina sintàctica que fa explícit aquest patró: el pipe</p>
+<pre class="r"><code>base_dades2 %&gt;% filter(edat &gt; 22)</code></pre>
+<pre><code>##      nom Grup edat nota sexe
+## 1    Pep    b   24  NOT    H
+## 2  Laura    c   28  SUF    D
+## 3 Antoni    d   31  SUS    H</code></pre>
+<p>Podem crear pipelines, combinant funcions:</p>
+<pre class="r"><code>base_dades2 %&gt;% filter(edat &gt; 25 &amp; edat &lt; 30) %&gt;% select(nom)</code></pre>
+<pre><code>##     nom
+## 1 Laura</code></pre>
+</div>
+</div>
+<div id="mètode-2-els-index" class="section level2">
+<h2>MÈTODE 2: ELS INDEX</h2>
+<p>Utilitza índexs per obtenir subconjunts és el procediment més universal en R, ja que funciona per a totes les estructures de dades. Un índex en R representa una posició. Quan fem servir índexs li demanem a R que extregui d’una estructura les dades que es troben en una o diverses posicions específiques dins d’ella.</p>
+<p><em>Exemple 1: índex amb vectors</em></p>
+<pre class="r"><code>nivell &lt;- c(&quot;Preescolar&quot;, &quot;Primaria&quot;, &quot;Secundaria&quot;, &quot;Educació Mitja Superior&quot;,
+           &quot;Educació Superior&quot;)
+
+length(nivell) # És un vector amb llargada igual a 5 </code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>Com podem obtenir el tercer element d’aquest vector utilitzant índex?</p>
+<pre class="r"><code>nivell[3] # Escrivim amb corxets després de l&#39;objecte la posició de l&#39;element que ens interessa extreure</code></pre>
+<pre><code>## [1] &quot;Secundaria&quot;</code></pre>
+<pre class="r"><code>nivell [4:5] # extreiem els elements de la 4a a 5a posició </code></pre>
+<pre><code>## [1] &quot;Educació Mitja Superior&quot; &quot;Educació Superior&quot;</code></pre>
+<pre class="r"><code># nivell [2,3] # Ens dóna error: per què?</code></pre>
+<p>ERROR: El missatge d’error ens dóna una pista molt important. A l’usarà la coma dins dels claudàtors estem donant la instrucció a R de buscar els índexs sol·licitats en més d’una dimensió. El nombre abans de la coma serà buscat a la primera dimensió de l’objecte, i el segon número, en la seva segona dimensió.</p>
+<p>Llavors, a l’executar nivell [2, 5], el que estem demanant és que R s’extregui l’element que es troba en la posició 2 de la primera dimensió de el vector, i l’element en la posició 5 de la seva segona dimensió. Com els vectors són unidimensionals, és impossible complir aquesta instrucció i es produeix un error. Recorda que a R, un nombre senzill és també un vector, per tant, quan escrivim vector [3], en realitat estem donant com a índex un vector que conté el número 3.</p>
+<p>Si volem extreure elements en posicions no consecutives, haurem d’usar vectors generats amb c()</p>
+<pre class="r"><code>nivell[c(2,5)]</code></pre>
+<pre><code>## [1] &quot;Primaria&quot;          &quot;Educació Superior&quot;</code></pre>
+<p>Per a estructures de dues dimensions, com són matrius i data frames, el primer vector d’un índex, abans d’una coma, és la posició en les línies i el segon és la posició les columnes.</p>
+<pre class="r"><code>base_dades2 &lt;- data.frame(&quot;nom&quot; = c(&quot;Armando&quot;, &quot;Elsa&quot;, &quot;Ignasi&quot;, &quot;Olga&quot;),
+                                  &quot;edat&quot; = c(20, 24, 22, 30),
+                                  &quot;sexe&quot; = c(&quot;H&quot;, &quot;D&quot;, &quot;D&quot;, &quot;H&quot;),
+                                  &quot;grup&quot; = c(0, 1, 1, 0))
+
+base_dades2 # Comprovem que la base de dades estigui correctament creada </code></pre>
+<pre><code>##       nom edat sexe grup
+## 1 Armando   20    H    0
+## 2    Elsa   24    D    1
+## 3  Ignasi   22    D    1
+## 4    Olga   30    H    0</code></pre>
+<pre class="r"><code>base_dades2[1] # Extreiem una columna completa, amb totes les files </code></pre>
+<pre><code>##       nom
+## 1 Armando
+## 2    Elsa
+## 3  Ignasi
+## 4    Olga</code></pre>
+<pre class="r"><code>base_dades2[c(1,3)] # Extreiem la columna 1 i 3, amb totes les files</code></pre>
+<pre><code>##       nom sexe
+## 1 Armando    H
+## 2    Elsa    D
+## 3  Ignasi    D
+## 4    Olga    H</code></pre>
+<p>Si utilitzem comes, el vector abans de la coma ens tornarà una filera completa</p>
+<pre class="r"><code>base_dades2[3,] # Nota que si deixem buit l&#39;espai després de la coma ens torna totes les columnes</code></pre>
+<pre><code>##      nom edat sexe grup
+## 3 Ignasi   22    D    1</code></pre>
+<p>Si l’espai que deixem buit és abans de la coma, obtenim les columnes (equivalent a utilitzar un sol numero als corxets)</p>
+<pre class="r"><code>base_dades2[,1]</code></pre>
+<pre><code>## [1] &quot;Armando&quot; &quot;Elsa&quot;    &quot;Ignasi&quot;  &quot;Olga&quot;</code></pre>
+<p>Combinant corxets i posicions de files i columnes, podem extreure dades específiques</p>
+<pre class="r"><code>base_dades [2,3]</code></pre>
+<pre><code>## [1] 3.4</code></pre>
+</div>
+<div id="mètode-3-els-noms" class="section level2">
+<h2>MÈTODE 3: ELS NOMS</h2>
+<p>Els elements d’un data frame són les seves columnes i cadascuna d’elles té un nom, el que estem demanant a R amb aquest mètode és que ens torni els elements el nom coincideixi amb el qual hem proporcionat</p>
+<pre class="r"><code>base_dades2[&quot;nom&quot;] # Obtenim tota la columna de &#39;nom&#39;</code></pre>
+<pre><code>##       nom
+## 1 Armando
+## 2    Elsa
+## 3  Ignasi
+## 4    Olga</code></pre>
+<p>Igual que amb les index, si utilitzem comes, R entèn que estem intentant extreure dades de diferents dimensions</p>
+<pre class="r"><code>base_dades2[&quot;nom&quot;, &quot;grup&quot;] # Ens dóna NA perquè intenta buscar &quot;grup&quot; a les files i no existeix</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>Es poden combinar index i noms per extreure subconjunts</p>
+<pre class="r"><code>base_dades2[3:4, &quot;nom&quot;] # Extreiem les files 3 i 4 de la columna &#39;nom&#39;</code></pre>
+<pre><code>## [1] &quot;Ignasi&quot; &quot;Olga&quot;</code></pre>
+</div>
+<div id="mètode-4-el-signe-del-dolar" class="section level2">
+<h2>MÈTODE 4: EL SIGNE DEL DOLAR</h2>
+<p>Una manera molt habitual d’extreure subconjunts utilitzant noms és amb el signe dolar $ Per utilitzar aquest mètode podem escriure el signa $ desrés del nom d’un objecte de la següent forma objecte$nom</p>
+<p><em>Exemple: extreiem la columna nom de la base de dades</em>:</p>
+<pre class="r"><code>base_dades2$nom</code></pre>
+<pre><code>## [1] &quot;Armando&quot; &quot;Elsa&quot;    &quot;Ignasi&quot;  &quot;Olga&quot;</code></pre>
+<p>També podem escriure el nom entre cometes, això serà útil si el nom conté espais</p>
+<pre class="r"><code>base_dades2$&quot;nom&quot;</code></pre>
+<pre><code>## [1] &quot;Armando&quot; &quot;Elsa&quot;    &quot;Ignasi&quot;  &quot;Olga&quot;</code></pre>
+<p>Si intentem donar més d’un nom després del signe $ ens donarà error El resultat de les operacions anteriors NO és un dataframe, sinó un vector A l’utilitzar el signe $ per extreure un element d’un data frame o una llista, obtenim un objecte de la classe que aquest element era originalment.</p>
+</div>
 </div>
 
 
@@ -355,7 +946,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
