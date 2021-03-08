@@ -1,28 +1,19 @@
 ---
-title: "Ordenació de variables"
+title: "Anàlisi de variables i ordenació de dades"
 ---
 
-### Part pràctica: Variables i ordenació de data.frames en R
+### Variables i ordenació de data.frames en R
 
 
 #### Primer pas
 
-Fixem el nostre director de treball d'on obtindrem les dades i on guardarem els nostres scripts per poder iniciar la sessió pràctica.
-
-```{r setup, include= FALSE}
-#setwd("C:/Users/m_rio/OneDrive/Escritorio/Documentos Mario/UdG/Estadística/Repositori/Stats_CPA")
-#getwd()
-```
-
-
+Recordem que treballarem amb el projecte que tenim obert per a les classes pràctiques i que vam crear el primer dia. 
 
 ### Les variables a R
-
 
 R és un programa d’anàlisi estadístic de dades que ens permet analitzar, descriure i operar amb variables com les que hem acabat d’estudiar. Ens permet aplicar totes les tècniques estadístiques que veurem al llarg de les properes sessions però també ens permet recopilar dades i emmagatzemar-les d’una determinada forma. Per tant, en les bases de dades que carreguem a R identificar totes les tipologies de variables que hem estudiat a nivell teòric. 
 
 Tanmateix, hem de tenir clar abans d’analitzar una variable a R provinent d’una determinada base de dades el que caracteritza a cada tipus de variable, quina forma prenen i quin tipus d’informació volem obtenir. En aquest apartat farem un repàs de com les trobarem en el programa R.
-
 
 
 #### Les variables categòriques nominals en R
@@ -78,14 +69,7 @@ levels(paisos) <- c("Brazil","Argentina","Venezuela", "Uruguay", "Paraguay")
 paisos #Comprovem el resultat
 ```
 
-
-També podem modificar un sol nivell:
-```{r}
-levels(paisos)[4] <- c("URUGUAY") 
-paisos ###### comprovem els resultats
-```
-
-Si volem també podem modificar els nivells a través d'un argument a la funció factor().
+Si volem també podem modificar les categories a través d'un argument a la funció factor().
 
 ```{r}
 factor(paisos, labels = c("Argentina", "Brazil", "Paraguay", "Uruguay", "Venezuela"))
@@ -101,10 +85,6 @@ Per comprovar-ho, crearem un vector lògic de la següent manera:
 ```{r}
 vector_logic <- c(TRUE, FALSE, FALSE, TRUE)
 ```
-
-
-
-
 
 #### Les variables categòriques ordinals en R
 
@@ -129,14 +109,13 @@ wb <- data.frame(country = c("Antigua and Barbuda", "Belize", "Costa Rica", "Dom
 
 Imprimim el marc de dades teclejant wb. Fixeu-vos en el procediment per convertir un factor en ordinal:
 
-     •	A dins de la funció factor(), indiquem que l’argument   order a TRUE.
+  •	A dins de la funció factor(), indiquem que l’argument order a TRUE.
      
-     •	Indiquem a l’argument levels l’ordre dels factors, de menor a major.
+  •	Indiquem a l’argument levels l’ordre dels factors, de menor a major.
 
 ```{r}
 wb$income <- factor(wb$income, order = TRUE, levels = c("low", "lower-middle", "upper-middle", "high"))
 ```
-
 
 Comproveu el resultat amb:
 
@@ -183,8 +162,6 @@ pov$poverty < 16
 Per passar qualsevol tipus de vector a vector lògic haurem de dominar els operadors relacionals. En aquest enllaç teniu un video sobre com fer servir operadors relacionals. És molt important el seu us a R. 
 
 
-
-
 #### Les variables categòriques binàries en R
 
 Les variables categòriques binàries només poden adoptar dos valors. Es poden crear amb vectors de caràcter, factors o vectors lògics, tal com s’ha mostrat en els anteriors apartats.
@@ -206,8 +183,8 @@ as.factor(sexe)
 
 ```{r}
 sexe <- c(TRUE, FALSE) 
+class(sexe)
 ```
-
 
 
 #### Les variables numèriques en R
@@ -259,7 +236,7 @@ c(1, 3, 6) * c(1, 3)
 ```
 
 
-### Funcions per obtenir informació dels objectes i de les variables a R.
+### Exploració bàsica de bases de dades i variables. Funcions per obtenir informació dels objectes i de les variables a R.
 
 Utilitzem l'anterior data.frame:
 
@@ -332,7 +309,6 @@ Fem el mateix que hem fet amb la funció unclass():
 unclass(wb)
 ```
 
-
 Ens dona tota la informació del data.frame: categories de la primera variable (country) i de la segona (income) i el número total de casos (15).
 
 ```{r}
@@ -347,131 +323,137 @@ unclass(wb$income)
 
 Ens dona els nivells o categories ordinals i com s'ordenen en el total de casos.
 
-Comprovem això amb dades reals. Utilitzarem  la base de dades de la darrer enquesta preelectoral del CEO (REO 992)
-
-##### Enquesta preelectoral 2021. Centre d'Estudis d'Opinió. Extreta de ttps://ceo.gencat.cat/ca/barometre/detall/index.html?id=7908
-
-Carreguem la library (readr) per poder obrir els dos arxius que tenen diferent format.
+Comprovem això amb dades reals. Utilitzarem la base de dades d'enquestes del ICPS des del 1991 fins al 2019. Carreguem la library (foreign) o (readr) per poder obrir els dos arxius que tenen diferent format.
 
 ```{r}
-library(readr)
+#library(foreign)
 ```
+
 Carreguem també la library(tidyverse) per poder obrir funcions d'exploració de dades:
 
 ```{r}
-library(tidyverse)
-library(readr)
+#library(tidyverse)
 ```
 
-
-Carreguem el de la base de dades de l'enquesta del CEO:  
+Carreguem el de la base de dades de l'enquesta del ICPS:  
 
 ```{r}
-ceo <- read.csv("Microdades anonimitzades -992.csv", sep = ";", dec = ".", header = TRUE, encoding = "UTF-8")
+ICPS <- read.spss("./dades/Sondeig Opinio Catalunya base integrada_ICPS.sav")
+as_tibble(ICPS)
 ```
 
 Apliquem les funcions analitzades anteriorment
 
 ```{r}
-class(ceo)
+class(ICPS)
 ```
-
-Amb class(), el programa R ens diu que estem davant una llista: que és un objecte format per diferents vectors de diferent tipus.
+Una llista és un objecte format per diverses bases de dades unides. Per tal de poder operar amb ell cal convertir-lo en un marc de dades. Ho fem de la següent manera:
 
 ```{r}
-glimpse(ceo)
+ICPS <- as.data.frame(ICPS)
+class(ICPS)
 ```
 
-Si utilitzem glimpse() podem veure com és una base de dades amb 130 variables i 1100 casos. A més, podem veure els diferents tipus de variables que tenim. Aquesta funció ens resumeix diferents caràcterístiques d'aquest data.frame.
+Amb class(), el programa R ens diu que ara estem davant un data.frame.
+
+```{r}
+glimpse(ICPS)
+```
+
+Si utilitzem glimpse() podem veure com és una base de dades amb 573 variables i 37.972 casos. A més, podem veure els diferents tipus de variables que tenim. Aquesta funció ens resumeix diferents caràcterístiques d'aquest data.frame.
 
 Aquestes dues funcions ens donen tota la informació de cadascuna de les variables però ens la dona de cop i és poc útil. És millor analitzar variable a variable.
 
 Per últim, si volem que R ens ensenyi la totalitat de la base de dades ben ordenada podem realitzar la funció View():
 
 ```{r}
-View(ceo)
+#View(ICPS)
 ```
 
-Ens obre una pestanya on ens indica el nom de totes les variables, el tipus que son i les seves categories o valors.
-Com sabem, aquestes funcions també es poden aplicar variable a variable. De fet, és més útil que en el total de la base de dades.
+Ens obre una pestanya on ens indica el nom de totes les variables, el tipus que son i les seves categories o valors. Com sabem, aquestes funcions també es poden aplicar variable a variable. De fet, és més útil que en el total de la base de dades.
 
 La funció names ens dona el nom de totes les variables de la base de dades analitzada.
 
 ```{r}
-names(ceo)
+names(ICPS)
 ```
 
 Ara busquem les variables més facilment identificables pel seu contngut: ANY, PROVINCIA, SEXE i DIMENSIO.
 
 ```{r}
-glimpse(ceo$ANY)
+glimpse(ICPS$ANY)
 ```
 
-La funció glimpse() ens diu que any és una variable númerica que té 1100 casos.
+La funció glimpse() ens diu que any és una variable qualitativa en format factor que té 26 nivells doferents.
 
 ```{r}
-class(ceo$ANY)
-```
-Ens confirma que és una variable numèrica discreta (integer)
+class(ICPS$ANY)
+attributes(ICPS$ANY) 
+levels(ICPS$ANY)
 
-Analitzem la variable EDAT_GR.
+```
+
+Ens confirma que és una variable qualitativa (factor)
+
+Analitzem la variable SEXE.
 
 ```{r}
-class(ceo$EDAT_GR)
+class(ICPS$SEXE)
 ```
 
-Ens diu que és un caràcter. Recordem que aquesta és una manera d'enmagatzemar a R les variables qualitatives. Si la convertim en un factor i li apliquem la funció levels podem saber quantes i quines son les categories d'aquesta variable. 
+Ens diu que és un factor. Recordem que aquesta és una manera d'enmagatzemar a R les variables qualitatives.  
 
 ```{r}
-ceo$EDAT_GR <- as.factor(ceo$EDAT_GR)
-attributes(ceo$EDAT_GR)
+levels(ICPS$SEXE) #Ens diu que dos: "Home" i "Dona". És una variable qualitativa dicotòmica.
+unclass(ICPS$SEXE) #A l'enquesta pren els valors d'1 "Home" i 2 "Dona". Aqui veiem com es distribueixen.
+glimpse(ICPS$SEXE) #Glimpse ens dona la mateixa informació que les altres funcions però concentrada en un comando. Ens diu que és un factor i que té dos categories: Home i Dona.
+attributes(ICPS$SEXE) #Ens dona la mateixa informació que glimpse()
 ```
-
-Ens diu que hi ha 5: "24 anys o menys", "De 25 a 34 anys", "De 35 a 49 anys", "De 50 a 64 anys", "65 anys o més". És una variable qualitativa ordinal.
-
-```{r}
-ceo$SEXE <- as.factor(ceo$SEXE)
-levels(ceo$SEXE)
-glimpse(ceo$SEXE)
-```
-
-La funció glimpse() ens dona la mateixa informació que les altres funcions però concentrada en un comandament. Ens diu que és un factor i que té dos categories: Home i Dona.
-
-```{r}
-attributes(ceo$SEXE)
-```
-
-Ens dona la mateixa informació que glimpse()
 
 Realitzeu el mateix amb PROVINCIA I HABITAT.
 
 #### Provincia
 ```{r}
-glimpse(ceo$PROVINCIA)
-class(ceo$PROVINCIA)
-ceo$PROVINCIA <- as.factor(ceo$PROVINCIA)
-levels(ceo$PROVINCIA)
-attributes(ceo$PROVINCIA)
+glimpse(ICPS$PROVINCIA)
+class(ICPS$PROVINCIA)
+levels(ICPS$PROVINCIA) #Ens dona les categories de la variable en format factor
+attributes(ICPS$PROVINCIA)
 ```
 
 #### Dimensió
 ```{r}
-glimpse(ceo$HABITAT)
-class(ceo$HABITAT)
-ceo$HABITAT <- as.factor(ceo$HABITAT)
-levels(ceo$HABITAT)
-attributes(ceo$HABITAT)
+glimpse(ICPS$DIMENSIO)
+class(ICPS$DIMENSIO)
+levels(ICPS$DIMENSIO)
+attributes(ICPS$DIMENSIO)
 ```
 
 #### Exercici a classe (IV). Exercici a classe (IV). 
 
 Mireu el llibre de codis de l’enquesta del ICPS (adjunt al material de la sessió) i identifiqueu diferents tipus de variables: quantitatives i qualitatives. Analitzeu-les amb les funcions explicades. Cal que trobeu un variable quantitativa i tres variables qualitatives: nominal, dicotòmica i ordinal.
 
+Recordeu que el codi per carregar la base de dades és aquest.
+
+
+```{r include=FALSE}
+ICPS <- read.spss("./dades/Sondeig Opinio Catalunya base integrada_ICPS.sav")
+```
+Aquí teniu el codi per transformar-la en data.frame i veure el nom de les variables.
+```{r}
+ICPS <- as.data.frame(ICPS)
+class(ICPS)
+```
+
+Nom de les variables:
+
+```{r}
+names(ICPS)
+```
+
+
 ### Recodificació de variables en R.
 
-La recodificació de variables és la transformació d'un determinat tipus de variable en una d'un tipus diferent. 
-
-Comencem creant una nova base de dades,
+La recodificació de variables és la transformació d'un determinat tipus de variable en una d'un tipus diferent. Comencem creant una nova base de dades,
 
    • Creem dos vector amb informació: un caràcter i un vector numèric:
    
@@ -481,18 +463,23 @@ country <- c("Armenia", "Austria","Benin","Bolivia","Brasil","Colombia","El Salv
 class(country) #Ens dona informació sobre que és un caràcter (variable qualitativa nominal)
 
 poverty <- c(1.90,0.7,49.6,6.4,3.4,4.5,1.9,26.7,16.2,7.2)
+
 class(poverty) #Ens diu que és un vector numèric (variable quantitativa continua)
 
 unemployment <- c(13.5, 5.2, 45.4,25.6,17.8,21.3,63.4,44.3,52.3,10.4)
+
 class(unemployment)
 
 population <- c(3001643, 8935112, 12114193, 11633371, 212216052, 51049498, 6704121, 98665000, 9368926, 259903244)
+
 class(population)
 
 gini <- c(34.4, 29.7, 47.8, 42.2, 53.9, 50.4, 38.6, 35.0, 52.1, 37.8)
+
 class(gini)
 
 pibcap <- c(4732,50552,1259,2579,11121,7838,3572,602,2241,4450)
+
 class(pibcap)
 
 ```
@@ -503,62 +490,65 @@ Totes les dades s'han extret de la pàgina web del Banc Mundial. Execepte la pri
  
 ```{r}
 pov <- data.frame(country, poverty, unemployment, population, gini, pibcap)
-View(pov) #Visualitzem la taula.
+#View(pov) #Visualitzem la taula.
 class(pov) #Ens diu que es un data.frame.
 glimpse(pov) #Ens diu que tenim un data.frame amb 10 fileres i dos columnes de variables una en format caràcter i l'altra numèric.
 
 ```
 
-Fem les comprovacions corresponents en el data.frame.
-
-```{r}
-pov$country == "Austria" #Si li preguntem a R si existeix el cas Austria a la base de dades noves ens diu que és la segona opció amb TRUE.
-pov$poverty > 15 #Ens diu que hi ha tres paisos amb una taxa de pobresa superior a 15% (3 TRUE)
-pov$unemployment > 25 #Ens diu que hi ha tres països per sobre de 25% d'atur.
-pov$population < 10000000
-pov$gini > 35
-pov$pibcap > 25000
-```
 
 Existeixen diversos tipus de recodificació de variables. Tanmateix, cal fer dos passos previament:
 
 1. Carregar la llibreria tidyverse.
 2. Quan recodifiquem variables és útil posar algun distintiu en el nom de la nova variable que ens recordi que ha estat recodificada. L'ús d'una _R al final o del sufix _rec ens pot ajudar.
 
+
 #### 1. Recodificar variables continues a categòriques I: el mètode if_elfe()
 
+Carreguem en primer lloc la llibreria tidyverse.
+
+```{r}
+library(tidyverse)
+```
+
+A partir d'ara, començarem 
 Seleccionem el nom de la variable que volem recodificar passant-la de numèrica a qualitativa i apliquem la funció if_else().
 
 ```{r}
+
 pov$unemployment_rec <- if_else(pov$unemployment >= 25, "Alt", "Baix")
 
-pov$unemployment_rec2 <- if_else(pov$unemployment >= mean(pov$unemployment), "Per sobre mitjana", "Per sota mitjana")
-table(pov$unemployment_rec2)
 summary(pov$unemployment)
+
+pov$unemployment_rec2 <- if_else(pov$unemployment >= mean(pov$unemployment), "Per sobre mitjana", "Per sota mitjana")
+
+table(pov$unemployment_rec2)
+
 ```
 
-Amb la funció if_else hem dit que tots aquells casos que la seva taxa d'atur sigui major de 25% (més gran o igual que)
-Es nomenaran a partir d'ara "Alt" i que els restans seran "Baix". El resultat és el següent:
+Amb la funció if_else hem dit que tots aquells casos que la seva taxa d'atur sigui major de 25% (més gran o igual que). Es nomenaran a partir d'ara "Alt" i que els restans seran "Baix". El resultat és el següent:
 
 ```{r}
 View(pov$unemployment_rec) #Mirem com ha quedat la nova base de dades amb la recodificació feta.
 table(pov$unemployment_rec)
 ```
+
 
 #### 2. Recodificar variables continues a categòriques II: el mètode case_when()
 
 Seleccionem el nom de la variable que volem recodificar passant-la de numèrica a qualitativa. En aquest cas volem transformar la variable pov$poverty que és numèrica continua en una qualitativa ordinal amb tres categories: "Low","Medium","High".
 
 ```{r}
-View(pov$unemployment_rec) #Mirem com ha quedat la nova base de dades amb la recodificació feta.
-table(pov$unemployment_rec)
+summary(pov$poverty)
+pov$poverty_rec <- case_when(pov$poverty < 10 ~ "Low", between(pov$population, 10, 15) ~ "Medium", TRUE ~ "High")
 ```
 
 Ens ha transformat la variable poverty en una variable qualitativa ordinal que cal ordenar amb la següent funció.
 
 ```{r}
-pov$poverty_rec <- factor(pov$poverty, order = TRUE, levels = c("Low", "Medium","High"))
-class(pov$poverty) #Si mirem amb la funció class() ja ens diu que tenim una variable qualitativa ordinal (ordered factor)
+pov$poverty_rec <- factor(pov$poverty_rec, order = TRUE, levels = c("Low", "Medium","High"))
+class(pov$poverty_rec) #Si mirem amb la funció class() ja ens diu que tenim una variable qualitativa ordinal (ordered factor)
+table(pov$poverty_rec)
 ```
 
 En aquest cas transformarem la variable numèrica population en una de qualitativa ordinal també per mitjà de la funció case_when().
@@ -566,6 +556,7 @@ En aquest cas transformarem la variable numèrica population en una de qualitati
 ```{r}
 pov$population_rec <- case_when(pov$population < 10000000 ~ "Low size", between(pov$population, 10000001, 60000000) ~ "Medium Size", TRUE ~ "Big Size")
 View(pov$population_rec)
+table(pov$population_rec)
 ```
 
 #### 3. Recodificació de variables continues a categòriques III: el mètode cut.
@@ -608,38 +599,14 @@ pov$unemployment_rec3 <-cut(pov$unemployment, breaks = c(0,15,30,45,60))
 table(pov$unemployment_rec3)
 ```
 
-#### 4. Reodificacio reduint categories amb corxetes. De categòrica ordinal a dicotòmica:
+Tornem a recodificar amb la base de dades sobre qualitat democràtica de la Freedom House que hem carregat abans. Recodifiquem amb if_else() i amb case_when().
 
-Carreguem una nova base de dades sobre participació en diferents democràcies. Aquí teniu la seva cita:
 
-```{r}
-idea <- read.csv("idea_turnout.csv", sep = ";", dec = ",", header = TRUE)
-as.tibble(idea)
-glimpse(idea)
-```
-
-##### IDEA International. Voter Turnout Database. Extreta de https://www.idea.int/data-tools/data/voter-turnout
-
-Ens interessa recodificar en quatre categories diferent la variable voter.turnout (participació electoral)
-
-```{r}
-idea$participacio_rec <- cut(idea$Participacio, breaks = 4, labels = c("Baixa", "Mitja-baixa", "Mitja-alta", "Alta"))
-table(idea$participacio_rec)
-```
-
-Ara volem passar a dos categories només.
-
-```{r}
-idea$participacio_rec2[idea$participacio_rec == "Baixa" | idea$participacio_rec == "Mitja-baixa"] <- "Baixa"
-idea$participacio_rec2[idea$participacio_rec == "Mitja-alta" | idea$participacio_rec == "Alta"] <- "Alta"
-table(idea$participacio_rec2)
-```
-
-#### 5. Més exemples de recodificació de variables. Ús de la funció recode()
+#### 4. Més exemples de recodificació de variables. Ús de la funció recode()
 
 ##### Exemple I. 
 ```{r}
-glimpse(ceo)
+#glimpse(ICPS)
 ```
 
 Busquem una variable ordinal que podem dicotomitzar, és a dir, que la podem transformar en una variable amb únicament dues opcions.
@@ -647,24 +614,27 @@ Busquem una variable ordinal que podem dicotomitzar, és a dir, que la podem tra
 Trobem la variable V010 Qualificació de l'actual situació política a Catalunya. Aquesta variable recull l'opinió dels enquestats sobre la situació política catalana.
 
 ```{r}
-class(ceo$P1) #És un caràcter.
-ceo$P1 <- as.factor(ceo$P1)
-glimpse(ceo$P1) #Té quatre nivells de resposta ordenats: és una variable qualitativa ordinal.
-attributes(ceo$P1) #Confirmem els nivells i el tipus d'objecte que és.
+class(ICPS$V010) #És un factor.
+levels(ICPS$V010) #Té quatre nivells de resposta ordenats: és una variable qualitativa ordinal.
+attributes(ICPS$V010) #Confirmem els nivells i el tipus d'objecte que és.
+glimpse(ICPS$V010)
 ```
 
 Recodifiquem en una variable dicotòmica que només tingui dues opcions: Negativa i Positiva.
 
 ```{r}
-ceo$P1R <- recode(ceo$P1, "Molt bona" = "Positiva", "Bona" = "Positiva", "Dolenta" = "Negativa", "Molt dolenta" = "Negativa", .default = NA_character_)
+ICPS$V010R <- recode(ICPS$V010, "Molt bona" = "Positiva", "Bona" = "Positiva", "Dolenta" = "Negativa", "Molt dolenta" = "Negativa", .default = NA_character_)
 ```
 
 Li diem ICPS$V010R per mantenir les dades originals sense manipular. Al afegir la R creem una altra variablr nova.
 
 ```{r}
-glimpse(ceo$P1R)
-table(ceo$P1R)
+glimpse(ICPS$V010R)
 ```
+```{r}
+table(ICPS$V010R)
+```
+
 
 Hem convertit les categories "Molt bona" i "Bona" en "Positiva" i "Molt dolenta" i "Dolenta" en "Negativa". Això el que ha fet es agrupar els casos de 4 opcions a 2. També hem eliminat la resta de valors (Regular, NS i NC).
 
@@ -673,17 +643,16 @@ Hem convertit les categories "Molt bona" i "Bona" en "Positiva" i "Molt dolenta"
 Provem de nou. Ara amb la variable V182 vinculada a les relacions entre Catalunya i Espanya. La variable dona fins a quatre opcions sobre el que Catalunya hauria de ser respecte a Espanya.
 
 ```{r}
-class(ceo$P9)
-ceo$P9 <- as.factor(ceo$P9)
-levels(ceo$P9)
-attributes(ceo$P9)
-glimpse(ceo$P9)
+class(ICPS$V182)
+levels(ICPS$V182)
+attributes(ICPS$V182)
+glimpse(ICPS$V182)
 ```
 
 Veiem com es distribueixen els casos en aquestes categories:
 
 ```{r}
-table(ceo$P9)
+table(ICPS$V182)
 ```
 
 
@@ -691,12 +660,11 @@ Recodifiquem en dos categories: "Romandre a Espanya" i "Independència".
 
 ```{r}
 
-ceo$P9R <- recode(ceo$P9, "Una regió d'Espanya" = "Romandre a Espanya", "Una comunitat autònoma d’Espanya" = "Romandre a Espanya", "Un Estat d'una Espanya Federal" = "Romandre a Espanya", "Un Estat independent" = "Independència", .default = NA_character_)
-
-class(ceo$P9R)
-levels(ceo$P9R)
-glimpse(ceo$P9R)
-table(ceo$P9R)
+ICPS$V182R <- recode(ICPS$V182, "Una regió d'Espanya" = "Romandre a Espanya", "Una Comunitat Autònoma d'Espanya" = "Romandre a Espanya", "Un Estat d'una Espanya Federal" = "Romandre a Espanya", "Un Estat independent" = "Independència", .default = NA_character_)
+class(ICPS$V182R)
+levels(ICPS$V182R)
+glimpse(ICPS$V182R)
+table(ICPS$V182R)
 ```
 
 És important entendre quina és la funció de recodificar i quins objectius perseguim amb això.
@@ -715,7 +683,7 @@ library(dplyr)
    • Carreguem ara una base de dades del sistema.
    
 ```{r}
-install.packages("gapminder")
+#install.packages("gapminder")
 library(gapminder)
 ```
 
@@ -752,8 +720,19 @@ Si volem saber el nom d'una o varies columnes en qüestió:
 names(gapminder)[2] ### Ens donarà el nom de la segona columna del data.frame.
 names(gapminder)[2:4] ### Ens donarà el nom de les columnes de la 2 a la 4.
 ```
+Si volem extreure tota la informació d'un determinada variable hem d'aplicar els corxetes.
 
-També podem utilitzar funcions com str() i glimpse()
+```{r}
+gapminder[,4] #Ens dona tots els valors de la variable 4 (lifeExp)
+```
+
+Sí el que volem es veure un determinat cas o observació:
+```{r}
+gapminder[15,] #Ens dona tota la informació de la fila 15: el valor a cada variable.
+```
+
+
+També podem utilitzar funcions com str() i glimpse() que son més generalistes.
 
 ```{r}
 str(gapminder) #### Ens dona info de la base de dades (casos i variables) i info de totes les variables.
@@ -765,13 +744,17 @@ glimpse(gapminder) #### Ens dona la mateixa informació en format tibble()
 Analitzem ara una variable.
 
 ```{r}
-gapminder$country
+#gapminder$country
 ```
 
 Ens surt a la consola el nom de totes les etiquetes (142) i com es distribueixen.
 
 ```{r}
 unique(gapminder$country) #### Els països de la base de dades.
+```
+Fem el mateix per la variable Year.
+
+```{r}
 unique(gapminder$year) #### El número d'anys que apareixen en aquesta base de dades
 ```
 
@@ -815,12 +798,19 @@ En l'anterior apartat hem realitzat una observació o exploració general d'una 
 En aquest apartat aprendrem a utilitzar el paquet de transformació de dades dplyr que inclou 6 grans funcions:
 filtrar, ordenar, seleccionar, mutar, resumir i agrupar.
 
-#### ENGANXAR QUADRE RESUM LLIBRE JORDI (TAULA 8)
+#### Taula 1. Sis funcions bàsiques del paquet dplyr (Mas, 2020)
 
-Per treballar amb aquestes funcions que assenyala la taula utiltizarem la funció pipe(%>%) que ens permet encadenar
-funcions de manera simultanea sempre i quan tinguin el primer argument en comú. La taula 9 ens ho explica:
+####TAULA FUNCIONS DPLYR
 
-#### ENGANXAR TAULA 9 LLIBRE JORDI.
+![taula_dplyr](/images/taula_funcions_dplyr.png)
+
+Per treballar amb aquestes funcions que assenyala la taula utiltizarem la funció pipe(%>%) que ens permet encadenar funcions de manera simultanea sempre i quan tinguin el primer argument en comú. La taula 9 ens ho explica:
+
+#### Taula 2. Resum funció pipe()
+
+![taula_dplyr](/images/taula_pipe.png)
+
+####TAULA FUNCIONS PIPE
 
 Atenció: és important que cada cop que transformem la base de dades ho guardem en un altre objecte per no perdre la informació real de la base de dades.
 
@@ -834,15 +824,13 @@ library(dplyr)
 Carreguem de nou les dades anteriors sobre l'enquesta de l'ICPS per aplicar-hi totes les funcions. També les convertim en un data frame amb la funció as.data.frame i comprovem amb glimpse() i class() si s'ha convertit en un.
 
 ```{r}
-ceo <- read.csv("Microdades anonimitzades -992.csv", sep = ";", dec = ".", header = TRUE, encoding = "UTF-8")
-as.data.frame(ceo)
-names(ceo)
-glimpse(ceo)
-ceo <- as_tibble(ceo)
-class(ceo)
-
+ICPS <- read.spss("./dades/Sondeig Opinio Catalunya base integrada_ICPS.sav")
+ICPS <- as.data.frame(ICPS)
+class(ICPS)
+names(ICPS)
+#glimpse(ICPS)
+as.tibble(ICPS)
 ```
-
 
 
 #### 1. Filtrar (filter)
@@ -852,10 +840,10 @@ La funció filtrar ens permet crear un subconjunt de files d'un marc de dades de
 Suposem que volem veure només les observacions d'una sola provincia: en aquest cas la de Girona. Com veiem hi ha una variable que es diu "PROVINCIA". Apliquem la funció filter() amb la funció pipe().
 
 ```{r}
-table(ceo$PROVINCIA) ### Observem quans casos hi ha a Girona i quina és l'etiqueta exacte.
-ceo_girona <- ceo %>% filter(PROVINCIA == "GIRONA") ### Filtrem usant pipe() i filter()
-glimpse(ceo_girona) ### Analtizem la nova base de dades
-table(ceo_girona$PROVINCIA) ### Comprovem el nombre de casos.
+table(ICPS$PROVINCIA) ### Observem quans casos hi ha a Girona i quina és l'etiqueta exacte.
+ICPS_Girona <- ICPS %>% filter(PROVINCIA == "Girona") ### Filtrem usant pipe() i filter()
+#glimpse(ICPS_Girona) ### Analtizem la nova base de dades
+table(ICPS_Girona$PROVINCIA) ### Comprovem el nombre de casos.
 ```
 
 Hem aconseguit filtrar la base de dades de l'enquesta del CEO per els casos de la provincia de Girona.
@@ -863,10 +851,10 @@ Hem aconseguit filtrar la base de dades de l'enquesta del CEO per els casos de l
 Provem ara a realitzar dos filtratges a la vegada.
 
 ```{r}
-ceo_tarragona_joves <- ceo %>% filter(PROVINCIA == "TARRAGONA") %>% filter(EDAT_GR == "24 anys o menys")
-glimpse(ceo_tarragona_joves)
-table(ceo_tarragona_joves$PROVINCIA)
-table(ceo_tarragona_joves$EDAT_GR)
+ICPS_Tarragona_2010 <- ICPS %>% filter(PROVINCIA == "Tarragona") %>% filter(ANY == "2010")
+#glimpse(ICPS_Tarragona_2010)
+table(ICPS_Tarragona_2010$PROVINCIA)
+table(ICPS_Tarragona_2010$ANY)
 ```
 
 Aquí tenim un doble filtratge: per una banda els casos de la provincia de Tarragona i per l'altre els casos que tenen 24 anys o meys. Això ens diu que a només hi ha 9 casos que compleixin aquests requisits.
@@ -874,23 +862,27 @@ Aquí tenim un doble filtratge: per una banda els casos de la provincia de Tarra
 Realitzem un nou filtratge. En aquest cas tenint en compte les preferències en les relacions CAT-ESP.
 
 ```{r}
-table(ceo$P9)
-ceo_indy <- ceo %>% filter(P9 == "Un Estat independent")
-glimpse(ceo_indy)
+table(ICPS$V182)
+ICPS_indy <- ICPS %>% filter(V182 == "Un Estat independent")
+glimpse(ICPS_indy)
+
 ```
 
 Per acabar fem un doble filtratge més: Estat independent i sexe dona.
 
 ```{r}
-table(ceo$SEXE)
-ceo_indy_dona <- ceo %>% filter(P9 == "Un Estat independent") %>% filter(SEXE == "Dona") %>% droplevels() 
-### droplevels serveix per eliminar les categories que ja no necessitem
-glimpse(ceo_indy_dona)
-table(ceo_indy_dona$SEXE)
-table(ceo$P9, ceo$SEXE) ###Comprovació amb les variables originals
+table(ICPS$SEXE)
+ICPS_indy_dona <- ICPS %>% filter(V182 == "Un Estat independent") %>% filter(SEXE == "Dona") %>% droplevels() 
+#glimpse(ICPS_indy_dona)
+table(ICPS_indy_dona$SEXE)
 ```
 
 A través d'aquests filtratges podem estudiar les variables segmentades pels casos que ens interessen.
+
+```{r}
+table(ICPS$V182, ICPS$SEXE) ###Comprovació amb les variables originals
+```
+
 
 #### 2. Ordenar
 
@@ -925,25 +917,16 @@ La funció select() ens permet seleccionar el número de columnes, és a dir, va
 Provem com funciona. Seleccionem variables relacionades amb les Relacions CAT-ESP de l'ICPS.
 
 ```{r}
-class(ceo$P9) ### Model territorial
-ceo$P9F <- as.factor(ceo$P9)
-levels(ceo$P9)
-class(ceo$P10) #### Vol que CAT sigui independent?
-ceo$P10F <- as.factor(ceo$P10) 
-levels(ceo$P10)
-class(ceo$P8) ### Grau autonomia Catalunya
-ceo$P8F <- as.factor(ceo$P8)
-levels(ceo$P8)
+#V182 #### Model territorial
+#V187 #### Proximitat a ESP
+#V188 #### Proximitat a CAT
+
+names(ICPS)
+ICPS_nacional <- ICPS %>% select(V182,V187,V188)
+glimpse(ICPS_nacional)
 ```
 
-Seleccionem aquestes variasbles per formar una nova base de dades. 
-
-```{r}
-ceo_nacional <- ceo %>% select(P9,P8,P10)
-glimpse(ceo_nacional)
-```
-
-Hem creat una base de dades amb tots els casos i només 4 variables vinculades al tema nacional.
+Hem creat una base de dades amb tots els casos i només 3 variables vinculades al tema nacional.
 
 
 #### 4. Mutar
@@ -954,6 +937,9 @@ Primer cas:
 
 ```{r}
 gapminder
+```
+
+```{r}
 gapminder %>% mutate(pop = pop/1000000) %>% head()
 ```
 
@@ -962,12 +948,10 @@ La columna pop ha canviat de l'original a l'actual amb l'operació realitzada.
 Segon cas: 
 
 ```{r}
-gapminder
 gapminder %>% mutate(gdp = gdpPercap*pop) %>% head()
 ```
 
 Afegeix la columna gdp que hem creat nova fruit de multiplicar PIB per cápita i població total. Això ens dona el PIB del país.
-
 
 
 #### 5. Resumir
@@ -1002,21 +986,17 @@ Què ens dona aquesta gran funció? Una taula on apareix la següent informació
 
 La funció group_by() s'ha d'aplicar en combinació amb altres variables. Aquesta opció ens permet agrupar algunes funcions seguint per les categories d'altres variables. Normalment hem de combinar aquesta funció amb summarize().
 
-Creem base de dades nova (Sánchez, 2020):
 
 ```{r}
-city <- c("New York", "New York", "London", "London", "Beijing", "Beijing")
-size <- c("large","small","large","small","large","small")
-amount <- c(23, 14, 22, 16, 121, 56)
-
-pollution <- data.frame(city, size, amount)
-
-glimpse(pollution)
-
-pollution %>%  group_by(city) %>%  summarise(mean = mean(amount), sum = sum(amount), n = n())
-
+gapminder %>% filter(year == 1952) %>% group_by(continent) %>% 
+  summarize(tpop = sum(pop), 
+                        mean_gdpcap = mean(gdpPercap, na.rm = TRUE),
+                        prop = mean(gdpPercap > mean_gdpcap),
+                        esp = sum(lifeExp > 60), count = n())
 ```
 
 Aquest codi ens permet agrupar per ciutat i ens resumeix la variable amount amb la mitjana.
 
-Conclusió final: un codi amb més operacions no és necessariament un codi millor. Un bon codi és aquell que ens ajuda a transformar les dades de manera que ens permeti respondre les preguntes que ens fem (Mas, 2020)
+**Conclusió final**: un codi amb més operacions no és necessariament un codi millor. Un bon codi és aquell que ens ajuda a transformar les dades de manera que ens permeti respondre les preguntes que ens fem (Mas, 2020)
+
+
