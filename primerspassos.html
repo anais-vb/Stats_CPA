@@ -13,18 +13,25 @@
 
 <title>Primeres passes</title>
 
-<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -36,11 +43,6 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -53,32 +55,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 
 
@@ -88,10 +65,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -108,40 +81,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -169,7 +115,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -181,7 +127,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -192,10 +138,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -207,7 +166,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -315,7 +273,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -414,14 +372,13 @@ X</code></pre>
 ## [13] &quot;rlang&quot;      &quot;pillar&quot;     &quot;withr&quot;      &quot;foreign&quot;    &quot;glue&quot;       &quot;DBI&quot;       
 ## [19] &quot;tidyverse&quot;  &quot;dbplyr&quot;     &quot;modelr&quot;     &quot;readxl&quot;     &quot;lifecycle&quot;  &quot;stringr&quot;   
 ## [25] &quot;munsell&quot;    &quot;gtable&quot;     &quot;cellranger&quot; &quot;rvest&quot;      &quot;evaluate&quot;   &quot;knitr&quot;     
-## [31] &quot;forcats&quot;    &quot;gapminder&quot;  &quot;curl&quot;       &quot;markdown&quot;   &quot;fansi&quot;      &quot;xlsxjars&quot;  
-## [37] &quot;broom&quot;      &quot;methods&quot;    &quot;Rcpp&quot;       &quot;readr&quot;      &quot;backports&quot;  &quot;scales&quot;    
-## [43] &quot;xlsx&quot;       &quot;jsonlite&quot;   &quot;fs&quot;         &quot;ggplot2&quot;    &quot;hms&quot;        &quot;stats&quot;     
-## [49] &quot;datasets&quot;   &quot;graphics&quot;   &quot;digest&quot;     &quot;stringi&quot;    &quot;dplyr&quot;      &quot;grid&quot;      
-## [55] &quot;cli&quot;        &quot;tools&quot;      &quot;magrittr&quot;   &quot;tibble&quot;     &quot;crayon&quot;     &quot;tidyr&quot;     
-## [61] &quot;pkgconfig&quot;  &quot;ellipsis&quot;   &quot;xml2&quot;       &quot;utils&quot;      &quot;reprex&quot;     &quot;lubridate&quot; 
-## [67] &quot;assertthat&quot; &quot;rmarkdown&quot;  &quot;base&quot;       &quot;httr&quot;       &quot;rstudioapi&quot; &quot;R6&quot;        
-## [73] &quot;compiler&quot;</code></pre>
+## [31] &quot;forcats&quot;    &quot;gapminder&quot;  &quot;curl&quot;       &quot;fansi&quot;      &quot;xlsxjars&quot;   &quot;broom&quot;     
+## [37] &quot;methods&quot;    &quot;Rcpp&quot;       &quot;readr&quot;      &quot;backports&quot;  &quot;scales&quot;     &quot;xlsx&quot;      
+## [43] &quot;jsonlite&quot;   &quot;fs&quot;         &quot;ggplot2&quot;    &quot;hms&quot;        &quot;stats&quot;      &quot;datasets&quot;  
+## [49] &quot;graphics&quot;   &quot;digest&quot;     &quot;stringi&quot;    &quot;dplyr&quot;      &quot;grid&quot;       &quot;cli&quot;       
+## [55] &quot;tools&quot;      &quot;magrittr&quot;   &quot;tibble&quot;     &quot;crayon&quot;     &quot;tidyr&quot;      &quot;pkgconfig&quot; 
+## [61] &quot;ellipsis&quot;   &quot;xml2&quot;       &quot;utils&quot;      &quot;reprex&quot;     &quot;lubridate&quot;  &quot;assertthat&quot;
+## [67] &quot;rmarkdown&quot;  &quot;base&quot;       &quot;httr&quot;       &quot;rstudioapi&quot; &quot;R6&quot;         &quot;compiler&quot;</code></pre>
 <p>La gran quantitat de paquets disponibles a R és una de les claus d’èxit del propi llenguatge per al seu ús en estadística.</p>
 <p>Podem instal·lar paquets de diverses formes: - A través del menú: <em>Toools &gt; Install packages …</em> - A través de l’escriptori de R (secció de miscelània, al requadre dret inferior de l’escriptori) a la pestanya de “Packages” podem veure quins paquets tenim instal·lats i carregats.</p>
 <p>En la majoria de casos, utilitzarem la funció install.packages() al script o consola, i posarem el nom del paquet entre cometes. En aquest cas - per a practicar - instal·larem un paquet que conté diversos subpaquets i funcionalitats que utilitzarem al llarg del curs: el paquet <a href="https://www.tidyverse.org/">Tidyverse</a>:</p>
@@ -451,16 +408,17 @@ X</code></pre>
 <pre class="r"><code>#Per ajuda general 
 help.start()</code></pre>
 <pre><code>## If nothing happens, you should open
-## &#39;http://127.0.0.1:25403/doc/html/index.html&#39; yourself</code></pre>
+## &#39;http://127.0.0.1:11855/doc/html/index.html&#39; yourself</code></pre>
 <pre class="r"><code># Ajuda sobre una funció
 help(mean) # Equivalent to ?mean</code></pre>
 <p>L’ajuda apareixera a la pantalla d’ajuda de la dreta.</p>
 <pre class="r"><code>#Buscar el nombre de funcions que contenen un conjunt de caràcters
 apropos(&quot;mean&quot;)</code></pre>
-<pre><code>##  [1] &quot;.colMeans&quot;      &quot;.rowMeans&quot;      &quot;colMeans&quot;       &quot;cummean&quot;        &quot;kmeans&quot;        
-##  [6] &quot;mean&quot;           &quot;mean.Date&quot;      &quot;mean.default&quot;   &quot;mean.difftime&quot;  &quot;mean.POSIXct&quot;  
-## [11] &quot;mean.POSIXlt&quot;   &quot;mean_cl_boot&quot;   &quot;mean_cl_normal&quot; &quot;mean_sdl&quot;       &quot;mean_se&quot;       
-## [16] &quot;rowMeans&quot;       &quot;weighted.mean&quot;</code></pre>
+<pre><code>##  [1] &quot;.colMeans&quot;      &quot;.rowMeans&quot;      &quot;colMeans&quot;       &quot;cummean&quot;       
+##  [5] &quot;kmeans&quot;         &quot;mean&quot;           &quot;mean.Date&quot;      &quot;mean.default&quot;  
+##  [9] &quot;mean.difftime&quot;  &quot;mean.POSIXct&quot;   &quot;mean.POSIXlt&quot;   &quot;mean_cl_boot&quot;  
+## [13] &quot;mean_cl_normal&quot; &quot;mean_sdl&quot;       &quot;mean_se&quot;        &quot;rowMeans&quot;      
+## [17] &quot;weighted.mean&quot;</code></pre>
 <pre class="r"><code>#Buscar exemples d&#39;una funció
 example(mean)</code></pre>
 <pre><code>## 
@@ -503,7 +461,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

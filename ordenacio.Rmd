@@ -18,7 +18,6 @@ Tanmateix, hem de tenir clar abans d’analitzar una variable a R provinent d’
 
 #### Les variables categòriques nominals en R
 
-
 En primer lloc, tenim tres tipus de variables categòriques (nominals, ordinals o binàries), que podem emmagatzemar a R com a vectors de caràcter, factors o vectors lògics:
 
   •	Com a vectors de caràcter
@@ -357,7 +356,7 @@ class(ICPS)
 Amb class(), el programa R ens diu que ara estem davant un data.frame.
 
 ```{r}
-glimpse(ICPS)
+#glimpse(ICPS)
 ```
 
 Si utilitzem glimpse() podem veure com és una base de dades amb 573 variables i 37.972 casos. A més, podem veure els diferents tipus de variables que tenim. Aquesta funció ens resumeix diferents caràcterístiques d'aquest data.frame.
@@ -736,7 +735,7 @@ També podem utilitzar funcions com str() i glimpse() que son més generalistes.
 
 ```{r}
 str(gapminder) #### Ens dona info de la base de dades (casos i variables) i info de totes les variables.
-glimpse(gapminder) #### Ens dona la mateixa informació en format tibble()
+#glimpse(gapminder) #### Ens dona la mateixa informació en format tibble()
 ```
 
 #### Exploració específica dels casos i variables d'un data.frame
@@ -800,15 +799,13 @@ filtrar, ordenar, seleccionar, mutar, resumir i agrupar.
 
 #### Taula 1. Sis funcions bàsiques del paquet dplyr (Mas, 2020)
 
-####TAULA FUNCIONS DPLYR
-
-![taula_dplyr](/images/taula_funcions_dplyr.png)
+![taula_dplyr](./images/taula_funcions_dplyr.png)
 
 Per treballar amb aquestes funcions que assenyala la taula utiltizarem la funció pipe(%>%) que ens permet encadenar funcions de manera simultanea sempre i quan tinguin el primer argument en comú. La taula 9 ens ho explica:
 
 #### Taula 2. Resum funció pipe()
 
-![taula_dplyr](/images/taula_pipe.png)
+![taula_dplyr](./images/taula_pipe.png)
 
 ####TAULA FUNCIONS PIPE
 
@@ -827,7 +824,7 @@ Carreguem de nou les dades anteriors sobre l'enquesta de l'ICPS per aplicar-hi t
 ICPS <- read.spss("./dades/Sondeig Opinio Catalunya base integrada_ICPS.sav")
 ICPS <- as.data.frame(ICPS)
 class(ICPS)
-names(ICPS)
+#names(ICPS)
 #glimpse(ICPS)
 as.tibble(ICPS)
 ```
@@ -864,7 +861,7 @@ Realitzem un nou filtratge. En aquest cas tenint en compte les preferències en 
 ```{r}
 table(ICPS$V182)
 ICPS_indy <- ICPS %>% filter(V182 == "Un Estat independent")
-glimpse(ICPS_indy)
+#glimpse(ICPS_indy)
 
 ```
 
@@ -890,21 +887,21 @@ La función arrange() simplement ordena les files de manera ascendent o descende
 
 ```{r}
 a <- gapminder %>% arrange(lifeExp)
-glimpse(a)
+#glimpse(a)
 ```
 
 Ens dona tota la base de dades de gapminder ordenada de menor a major esperança de vida. Si volem fer-ho al revés.
 
 ```{r}
 b <- gapminder %>% arrange(desc(lifeExp))
-glimpse(b)
+#glimpse(b)
 ```
 
 Ara ens ho ordena de més esperança de vida a menys.
 
 ```{r}
 c <- gapminder %>% arrange(gdpPercap)
-glimpse(c)
+#glimpse(c)
 ```
 
 Ordenada per menys a més PIB per cápita.
@@ -923,7 +920,7 @@ Provem com funciona. Seleccionem variables relacionades amb les Relacions CAT-ES
 
 names(ICPS)
 ICPS_nacional <- ICPS %>% select(V182,V187,V188)
-glimpse(ICPS_nacional)
+#glimpse(ICPS_nacional)
 ```
 
 Hem creat una base de dades amb tots els casos i només 3 variables vinculades al tema nacional.
@@ -965,7 +962,7 @@ table(gapminder$year)
 gap_africa_1962<- gapminder %>% filter(continent == "Africa") %>% 
   filter(year == "1962")
 
-glimpse(gap_africa_1962)
+#glimpse(gap_africa_1962)
 
 gap_africa_1962 %>% summarize(tpop = sum(pop), 
                               mean_gdpcap = mean(gdpPercap, na.rm = TRUE),

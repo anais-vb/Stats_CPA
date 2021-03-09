@@ -4,7 +4,7 @@ title: "Objectes, estructures i elements bàsics"
 
 En aquest apartat aprendrem els rudiments bàsics de codi i programació amb R. Aquestes sessions seran importants perquè domineu els aspectes bàsics de R i pogueu avançar en l'assignatura satisfactòriament. 
 
-# 1. ELEMENTS BÀSICS: ELS OBJECTES A R 
+## 1. ELEMENTS BÀSICS: ELS OBJECTES A R 
 
 Com ja hem comentat, R funciona amb objectes. En aquest sentit totes les dades i estructures de dades a R seran objectes. En aquesta classe no entrarem en els detalls de què significa que un llenguatge de programació estigui orientat a objectes. El més important serà recordar que quan parlem d'un objecte estem parlant de qualsevol cosa que existeix a R i té un NOM 
 
@@ -22,26 +22,31 @@ Veiem que R entèn que el valor de x és 3, i per tant la suma dóna 7 . Hem de 
 A R trobem cinc tipus bàsics de dades:  
 
 - *Numeric*:nombres decimals 
+
 ```{r}
 numero <- 1.0 
 ```
 
 - *Integers*:nombres enters
+
 ```{r}
 int <- 1 
 ```
 
 - *Character*: cadenes de text 
+
 ```{r}
 char <- "un text"
 ```
 
 - *Complex*: nombres complexos 
+
 ```{r}
 comp <- 3-2i
 ```
 
 - *Logical*: Vertader (TRUE) o fals (FALSE) - Sovint és el resultat d'operacions lògiques 
+
 ```{r}
 a <- 1
 b <- 2
@@ -52,6 +57,7 @@ logical
 NA representa dades perdudes: R representa explícitament dades perdudes, omeses o que per algun motiu no hi són # Intentem recuperar una variable no contestada. NULL representa l'absència de dades: R intenta recuperar una dada i no troba res # Intentem recuperar una variable d'una unitat d'anàlisi que no existeix 
 
 A vegades, depèn de les funcions que apliquem a les nostres dades passarà el fenomen de la *'COERCIÓ'* 
+
 La coerció passa quan demanem a R executar una operació i aquest coerciona (normalment sense avisar) les dades que li donem a un tipus correcte que li permeti realitzar l'operació. Les coercions ocorren en el següent ordre: logical -> integer -> numeric -> character
 
 Per a verificar de quin tipus és una dada utilitzarem `<class()>`
@@ -61,12 +67,12 @@ class(char)
 ```
 
 També podem verificar amb la familia de funcions `<is()>`
+
 ```{r}
 is.integer(a)
 is.character(char)
 is.logical(a)
 ```
-
 
 
 **[ABANS DE CONTINUAR] BREU REFERÈNCIA A LES FUNCIONS** 
@@ -93,22 +99,22 @@ peso_factor #Aparentment és el mateix. Què ha canviat?
 ```
 
 Mirem les propietats i estructura dels dos objectes: 
+
 ```{r}
 str(peso)
 str(peso_factor)
 ```
 
-Si ens fixem, el que està fent un factor en realitat és determinar uns nivells (levels) 
-Els nivells, internament, s'identifiquen amb uns números i etiquetes. R compta la freqüència de cada nivell 
+Si ens fixem, el que està fent un factor en realitat és determinar uns nivells (levels). Els nivells, internament, s'identifiquen amb uns números i etiquetes. R compta la freqüència de cada nivell 
 
 ```{r}
 summary(peso_factor)
 ```
 
 
-# 2. OPERADORS 
+## 2. OPERADORS 
 
-## 2.1 Operadors aritmètics 
+### 2.1 Operadors aritmètics 
 
 Tipus d'operador per a operacions aritmètiques. És possible realitzar operacions aritmètiques amb dades de tipus enteres i numèriques. Aquests són: 
 - suma (+)
@@ -126,7 +132,7 @@ _Incís_:La divisió entera és una divisió d'un nombre entre un altre però en
 ```
 
 
-## 2.2  Operadors relacionals 
+### 2.2  Operadors relacionals 
 
 Són utilitzats per a fer comparaciopns i sempre tornen com a resultat TRUE o FALSE. Els operadors són: 
 
@@ -154,7 +160,7 @@ as.factor("casa") > "vaixell"
 ```
 
 
-## 2.3 Operadors logics 
+### 2.3 Operadors logics 
 
 Els operadors lògics s'utilitzen per operacions d'àlgebra booleana, és a dir, per a descriure relacions lògiques expressades com vertaderes o falses 
 
@@ -180,9 +186,9 @@ Aquests operadors es podran combinar per a expressar relacions complexes, i tamb
 !(FALSE | FALSE)
 ```
 
-# 3. TIPUS D'ESTRUCTURES DE DADES
+## 3. TIPUS D'ESTRUCTURES DE DADES
 
-## 3.1 VECTORS
+### 3.1 VECTORS
 
 Són els elements més bàsics a R. Sempre conté elements de la mateixa classe. Tots els vectors tenen tres propietats: tipus (classe de dades que conté), Llargada (nombre d'elements), i atributs (metadades, però nosaltres no tractarem això)
 
@@ -234,6 +240,7 @@ També podem crear seqüències numèriques utilitzant ":" - creant seqüències
 ```
 
 ### 3.1.1) Vectorització de les funcions
+
 Existeixen algunes operacions que a l'aplicar-les a un vector, s'apliquen a cadascun dels seus elements (vectorització). Les operacions aritmètiques i relacionals poden vectoritzar-se implicant que l'operació es realitza a cada element
 
 ```{r}
@@ -246,7 +253,7 @@ vector_numeric + 2
 vector_numeric * 2
 ```
 
-## 3.2 MATRIUS I ARRAYS
+### 3.2 MATRIUS I ARRAYS
 
 Les matrius i arrays poden ser descrites com a vectors multidimensionals. A l'igual que un vector, únicament poden contenir dades d'un sol tipus, però a més de llarg, tenen més dimensions. En un sentit estricte, les matrius són una cas especial d'un array, que es distingeix per tenir específicament dues dimensions, un "llarg" "i un" alt ". 
 - Les *matrius* són, per tant, una estructura amb forma rectangular, amb línies i columnes.
@@ -274,8 +281,10 @@ matrix(1:12, nrow = 3, ncol = 3)
 
 
 > **RECICLATGE:** 
+
 > Si, per contra, el nombre de cel·les és més gran que el nombre d'elements, aquests es reciclessin. 
 > Quant els elements siguin insuficients per a acomodar-se en les cel·les, R ens retornarà un advertiment i es comencessin a usar els elements a partir de el primer d'ells
+
 
 ```{r}
 matrix(1:12, nrow = 5, ncol = 4)
@@ -328,7 +337,7 @@ matriu4^3 # Elevar a la tercera potencia
 Si intentem vectorizar una operació utilitzant una matriu amb Nas, aquesta s'aplicarà per als elements vàlids, retornant NA quan correspongui.
 
 
-## 3.3 DATA FRAMES 
+### 3.3 DATA FRAMES 
 
 Els data frames o bases de dades són estructures de dades de dues dimensions que poden contenir dades de diferents tipus. És la més utilitzada per a realitzar anàlisi de dades 
 Podem veure els data frames com una versió més flexible d'una matriu, ja que mentre una matriu només permet dades d'un sol tipus, el data frame permet ddes de diferents tipus en les seves fileres (però no en les columnes)
@@ -390,7 +399,7 @@ Si els vectors que fem servir per construir el data frame no són de la mateixa 
  #  "cadena" = as.character (c("a", "b", "c", "d")))
 ```
 
-## 3.4 LLISTES 
+### 3.4 LLISTES 
 
 Les llistes, com els vectors, són estructures de dades unidimensionals que només tenen 'llarg'
 A diferència dels vectors, cadascun dels seus elements pot ser de diferent tipus o, fins i tot, de diferent classe
@@ -416,13 +425,13 @@ llista_recursiva
 ```
 
 
-# 4. QUÈ SÓN LES FUNCIONS?
+## 4. QUÈ SÓN LES FUNCIONS?
 
 R proporciona un gran ventall de funcions per a realitzar la majoria de tasques bàsiques d'analisi de dades. No obstant, a mida que avancem en anàlisis més complexes o bases de dades pròpies, serà habitual no trobaruna funció específica per allò que voleu fer
 En aquests casos, és normal que nosaltres haguem de crear la nostra pròpia funció amb codi o combinar altres funcions
 
 
-## 4.1 QUINS ELEMENTS TÉ UNA FUNCIÓ?
+### 4.1 QUINS ELEMENTS TÉ UNA FUNCIÓ?
 
 Una funció sempre té un nom, uns arguments i un cos. Les funcions definides per l'usuari tenen la següent estructura
 
@@ -446,7 +455,7 @@ Quan assignem una funció a un nom diem que hem definit una funció. Mirem els s
     - Si el cos conté errors, les operacions no es realitzaran i ens tornarà un error a l'executar-la (R no avisa si la funció funcionarà fins que ho intentem)
 
 
-## 4.2 COM CREEM UNA FUNCIÓ? 
+### 4.2 COM CREEM UNA FUNCIÓ? 
 
 En aquest exemple crearem una funció per calcular l'àrea d'un quadrilater (costat*costat)
 
@@ -479,14 +488,14 @@ area_quad(5,6) # Ara bé, al principi es recomana escriure el nom dels arguments
 ```
 
 
-# 5. SUBCONJUNTS 
+## 5. SUBCONJUNTS 
 
 A R, podem obtenir subconjunts de les nostres estructures de dades. És a dir, podem extreure parts d'una estructura de dades (el nostre conjunt). Fem això per seleccionar dades que tenen característiques específiques, per exemple, tots els valors majors a cert nombre o aquells que coincideixen exactament amb un valor del nostre interès.
 
 Per a manipular i ordenar dades, en aquest curs utilitzarem les eines del paquet 'TIDYVERSE'
 com a introducció és necessari que conegueu algunes eines de R Base que combinareu amb el paquet tidyverse d'ordenació de dades 
 
-## MÈTODE 1: TIDYVERSE (funcions i les 'pipes' %>% ) 
+### MÈTODE 1: TIDYVERSE (funcions i les 'pipes' %>% ) 
 
 **_AQUEST SERÀ EL QUE UTILITZEM EN AQUESTA ASSIGNATURA_** 
 
@@ -567,7 +576,7 @@ base_dades2 %>% filter(edat > 25 & edat < 30) %>% select(nom)
 ```
 
 
-## MÈTODE 2: ELS INDEX
+### MÈTODE 2: ELS INDEX
 
 Utilitza índexs per obtenir subconjunts és el procediment més universal en R, ja que funciona per a totes les estructures de dades. Un índex en R representa una posició. Quan fem servir índexs li demanem a R que extregui d'una estructura les dades que es troben en una o diverses posicions específiques dins d'ella.
 
@@ -632,8 +641,7 @@ base_dades [2,3]
 ```
 
 
-
-## MÈTODE 3: ELS NOMS 
+### MÈTODE 3: ELS NOMS 
 
 Els elements d'un data frame són les seves columnes i cadascuna d'elles té un nom, el que estem demanant a R amb aquest mètode és que ens torni els elements el nom coincideixi amb el qual hem proporcionat
 ```{r}
@@ -652,7 +660,7 @@ base_dades2[3:4, "nom"] # Extreiem les files 3 i 4 de la columna 'nom'
 
 ```
 
-## MÈTODE 4: EL SIGNE DEL DOLAR 
+### MÈTODE 4: EL SIGNE DEL DOLAR 
 
 Una manera molt habitual d'extreure subconjunts utilitzant noms és amb el signe dolar $ 
 Per utilitzar aquest mètode podem escriure el signa $ desrés del nom d'un objecte de la següent forma objecte$nom
